@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('tiangs', function (Blueprint $table) {
             $table->id();
-            $table->string('kode', 15);
+            $table->string('kode', 15)->unique();
             $table->string('kategori');
             $table->string('jenis');
             $table->string('lengan');
-            $table->string('tahun');
-            $table->string('bahan');
+            $table->string('tahun_pengadaan');
+            $table->string('jaringan');
+            $table->string('lampu');
+            $table->string('kordinat');
             $table->integer('panel_id');
             $table->timestamps();
         });

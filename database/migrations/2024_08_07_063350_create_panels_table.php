@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('panels', function (Blueprint $table) {
             $table->id();
-            $table->string('kode', 15);
+            $table->string('kode', 15)->unique();
+            $table->string('kwh');
+            $table->string('idpel');
             $table->string('jaringan');
+            $table->string('saklar');
+            $table->string('kordinat');
             $table->integer('jalan_id');
             $table->timestamps();
         });

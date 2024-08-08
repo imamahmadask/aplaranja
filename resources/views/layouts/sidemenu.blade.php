@@ -12,7 +12,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
         </li>
     </ul>
 
@@ -47,7 +47,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/admin/dashboard" class="brand-link">
+    <a href="/" class="brand-link">
         <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Aplaranja</span>
@@ -61,20 +61,7 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-            </div>
-        </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                    aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
+                <a class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -101,7 +88,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('panel') }}" class="nav-link {{ Request::routeIs('panel.*') ? 'active' : '' }}">
+                    <a href="{{ route('panel.index') }}"
+                        class="nav-link {{ Request::routeIs('panel.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Panel
@@ -109,7 +97,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('tiang') }}" class="nav-link {{ Request::routeIs('tiang.*') ? 'active' : '' }}">
+                    <a href="{{ route('tiang.index') }}"
+                        class="nav-link {{ Request::routeIs('tiang.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bolt"></i>
                         <p>
                             Tiang
@@ -117,7 +106,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('lampu') }}" class="nav-link {{ Request::routeIs('lampu.*') ? 'active' : '' }}">
+                    <a href="{{ route('lampu.index') }}"
+                        class="nav-link {{ Request::routeIs('lampu.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-lightbulb"></i>
                         <p>
                             Lampu

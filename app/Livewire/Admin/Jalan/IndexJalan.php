@@ -20,6 +20,16 @@ class IndexJalan extends Component
     #[Computed()]
     public function jalans()
     {
-        return Jalan::orderBy('kode', 'asc')->get();
+        return Jalan::where('nama', 'like', '%'.$this->search.'%')
+                ->orderBy('kode', 'asc')->get();
+    }
+
+    public function deleteJalan(Jalan $jalan)
+    {
+        if($jalan)
+        {
+            //destroy
+            $jalan->delete();
+        }
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('jalans', function (Blueprint $table) {
             $table->id();
-            $table->string('kode', 15);
+            $table->string('kode', 15)->unique();
             $table->string('nama', 50);
             $table->integer('panjang');
             $table->integer('lebar');

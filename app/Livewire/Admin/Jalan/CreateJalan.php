@@ -3,9 +3,11 @@
 namespace App\Livewire\Admin\Jalan;
 
 use App\Models\Jalan;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+#[Title('Create Jalan')]
 class CreateJalan extends Component
 {
     #[Validate('required')]
@@ -28,8 +30,6 @@ class CreateJalan extends Component
         ]);
 
         $this->reset();
-
-        session()->flash('status', 'Data Jalan berhasil ditambah!');
 
         $this->redirect('/admin/jalan');
     }
