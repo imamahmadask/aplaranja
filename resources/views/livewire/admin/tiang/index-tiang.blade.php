@@ -80,7 +80,7 @@
                                                 {{ $tiang->jaringan }}
                                             </td>
                                             <td>
-                                                {{ $tiang->kordinat }}
+                                                {{ $tiang->lat }}, {{ $tiang->long }}
                                             </td>
                                             <td>
                                                 {{ $tiang->panel->kode }}

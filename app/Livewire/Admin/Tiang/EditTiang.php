@@ -14,7 +14,7 @@ class EditTiang extends Component
     #[Validate('required')]
     public $tiangId, $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu;
 
-    public $panels;
+    public $panels, $lat, $long;
 
     public function render()
     {
@@ -32,7 +32,7 @@ class EditTiang extends Component
         $this->lengan = $tiang->lengan;
         $this->tahun_pengadaan = $tiang->tahun_pengadaan;
         $this->jaringan = $tiang->jaringan;
-        $this->kordinat = $tiang->kordinat;
+        $this->kordinat = $tiang->lat.", ".$tiang->long;
         $this->panel_id = $tiang->panel_id;
         $this->lampu = $tiang->lampu;
 
@@ -44,6 +44,8 @@ class EditTiang extends Component
         $this->validate();
 
         $tiang = Tiang::find($this->tiangId);
+
+        $this->getKordinat($this->kordinat);
 
         $tiang->update([
             'kode' => $this->kode,
@@ -60,5 +62,11 @@ class EditTiang extends Component
         $this->reset();
 
         $this->redirect('/admin/tiang');
+    }
+
+    public function getKordinat($value){
+        $pecah = explode(", ", $value);
+        $this->lat = $pecah[0];
+        $this->long = $pecah[1];
     }
 }

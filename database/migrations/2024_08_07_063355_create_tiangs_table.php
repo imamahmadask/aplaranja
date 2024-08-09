@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('tahun_pengadaan');
             $table->string('jaringan');
             $table->string('lampu');
-            $table->string('kordinat');
+            $table->string('lat');
+            $table->string('long');
             $table->integer('panel_id');
             $table->timestamps();
         });

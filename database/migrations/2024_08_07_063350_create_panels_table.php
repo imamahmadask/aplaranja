@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('idpel');
             $table->string('jaringan');
             $table->string('saklar');
-            $table->string('kordinat');
+            $table->string('lat');
+            $table->string('long');
             $table->integer('jalan_id');
             $table->timestamps();
         });

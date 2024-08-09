@@ -75,7 +75,7 @@
                                                 {{ $panel->saklar }}
                                             </td>
                                             <td>
-                                                {{ $panel->kordinat }}
+                                                {{ $panel->lat }}, {{ $panel->long }}
                                             </td>
                                             <td>
                                                 {{ $panel->jalan->nama }}

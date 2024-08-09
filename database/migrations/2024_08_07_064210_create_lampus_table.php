@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('jenis', 15);
             $table->string('daya', 15);
-            $table->string('merek', 15);
+            $table->string('merek', 50);
+            $table->string('lumen', 15);
             $table->string('tiang_id');
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class CreatePanel extends Component
     #[Validate('required')]
     public $kode, $kwh, $idpel, $saklar, $jaringan, $kordinat, $jalan_id;
 
-    public $jalans;
+    public $jalans, $lat, $long;
 
     public function render()
     {
@@ -25,13 +25,16 @@ class CreatePanel extends Component
     {
         $this->validate();
 
+        $this->getKordinat($this->kordinat);
+
         Panel::create([
             'kode' => $this->kode,
             'kwh' => $this->kwh,
             'idpel' => $this->idpel,
             'jaringan' => $this->jaringan,
             'saklar' => $this->saklar,
-            'kordinat' => $this->kordinat,
+            'lat' => $this->lat,
+            'long' => $this->long,
             'jalan_id' => $this->jalan_id
         ]);
 
@@ -43,5 +46,11 @@ class CreatePanel extends Component
     public function mount()
     {
         $this->jalans = Jalan::all();
+    }
+
+    public function getKordinat($value){
+        $pecah = explode(", ", $value);
+        $this->lat = $pecah[0];
+        $this->long = $pecah[1];
     }
 }
