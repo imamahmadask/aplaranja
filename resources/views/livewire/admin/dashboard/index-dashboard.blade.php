@@ -169,7 +169,7 @@
                             <h3 class="card-title">Data Tiang</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive p-0">
                             <table id="tablePanel" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -181,6 +181,7 @@
                                         <th>Jenis</th>
                                         <th>Lengan</th>
                                         <th>Jaringan</th>
+                                        <th>Posisi Tiang</th>
                                         <th>Lampu</th>
                                         <th>Kordinat</th>
                                     </tr>
@@ -199,6 +200,7 @@
                                             <td>{{ $data->jenis }}</td>
                                             <td>{{ $data->lengan }} Lengan</td>
                                             <td>{{ $data->jaringan }}</td>
+                                            <td>{{ $data->posisi_tiang }}</td>
                                             <td>{{ $data->lampu }}</td>
                                             <td>{{ $data->lat }}, {{ $data->long }}</td>
                                         </tr>

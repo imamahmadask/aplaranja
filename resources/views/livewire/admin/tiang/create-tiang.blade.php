@@ -56,6 +56,7 @@
                                         <option value="Galpanis">Galpanis</option>
                                         <option value="Besi">Besi</option>
                                         <option value="Dekoratif">Dekoratif</option>
+                                        <option value="-">Tidak ada</option>
                                     </select>
                                 </div>
 
@@ -80,6 +81,15 @@
                                         <option value="">Pilih Jenis Jaringan</option>
                                         <option value="Atas">Atas</option>
                                         <option value="Bawah">Bawah</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="posisi_tiang">Posisi Tiang</label>
+                                    <select name="posisi_tiang" wire:model="posisi_tiang" class="form-control">
+                                        <option value="">Pilih Posisi Tiang</option>
+                                        <option value="Bahu Jalan">Bahu Jalan</option>
+                                        <option value="Median">Median</option>
                                     </select>
                                 </div>
 

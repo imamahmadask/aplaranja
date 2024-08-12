@@ -66,7 +66,7 @@
                             <h3 class="card-title">Data Tiang</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive p-0">
                             <table id="tablePanel" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -77,6 +77,7 @@
                                         <th>Lengan</th>
                                         <th>Tahun Pengadaan</th>
                                         <th>Jaringan</th>
+                                        <th>Posisi Tiang</th>
                                         <th>Kordinat</th>
                                         <th>Panel</th>
                                         <th>Lampu</th>
@@ -109,6 +110,9 @@
                                             </td>
                                             <td>
                                                 {{ $tiang->jaringan }}
+                                            </td>
+                                            <td>
+                                                {{ $tiang->posisi_tiang }}
                                             </td>
                                             <td>
                                                 {{ $tiang->lat }}, {{ $tiang->long }}

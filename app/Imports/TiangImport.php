@@ -30,6 +30,7 @@ class TiangImport implements ToModel, WithHeadingRow, WithUpserts
             'lengan'            => $row['lengan'],
             'tahun_pengadaan'   => $row['tahun_pengadaan'],
             'jaringan'          => $row['jaringan'],
+            'posisi_tiang'      => $row['posisi_tiang'],
             'lat'               => $lat,
             'long'              => $long,
             'lampu'             => $row['lampu'],

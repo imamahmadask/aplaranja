@@ -40,6 +40,16 @@
                 </form>
             </div>
         </li>
+        <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="{{ route('logout') }}" class="nav-link"
+                    onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    <i class="fas fa-power-off"></i>
+                </a>
+            </form>
+        </li>
     </ul>
 </nav>
 <!-- /.navbar -->

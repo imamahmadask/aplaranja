@@ -12,7 +12,7 @@ use Livewire\Component;
 class CreateTiang extends Component
 {
     #[Validate('required')]
-    public $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu;
+    public $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu, $posisi_tiang;
 
     public $panels, $lat, $long;
 
@@ -38,6 +38,7 @@ class CreateTiang extends Component
             'long' => $this->long,
             'panel_id' => $this->panel_id,
             'lampu' => $this->lampu,
+            'posisi_tiang' => $this->posisi_tiang,
         ]);
 
         $this->reset();
