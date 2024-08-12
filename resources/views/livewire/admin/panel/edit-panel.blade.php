@@ -57,8 +57,8 @@
                                     <label for="jaringan">Jaringan</label>
                                     <select name="jaringan" wire:model="jaringan" class="form-control">
                                         <option value="">Pilih Jaringan</option>
-                                        <option value="1 Jaringan">1 Jaringan</option>
-                                        <option value="2 Jaringan">2 Jaringan</option>
+                                        <option value="1">1 Jaringan</option>
+                                        <option value="2">2 Jaringan</option>
                                     </select>
                                 </div>
 

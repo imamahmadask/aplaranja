@@ -18,7 +18,7 @@
 
     <style>
         #map {
-            height: 325px;
+            height: 420px;
             width: 100%;
         }
     </style>

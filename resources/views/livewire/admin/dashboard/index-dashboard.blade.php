@@ -27,7 +27,7 @@
                     <!-- small card -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $count_jalan }}</h3>
+                            <h3>{{ $stat['count_jalan'] }}</h3>
 
                             <p>Jumlah Jalan</p>
                         </div>
@@ -44,7 +44,7 @@
                     <!-- small card -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $count_panel }}</h3>
+                            <h3>{{ $stat['count_panel'] }}</h3>
 
                             <p>Jumlah Panel</p>
                         </div>
@@ -61,7 +61,7 @@
                     <!-- small card -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ $count_tiang }}</h3>
+                            <h3>{{ $stat['count_tiang'] }}</h3>
 
                             <p>Jumlah Tiang</p>
                         </div>
@@ -78,7 +78,7 @@
                     <!-- small card -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ $count_lampu }}</h3>
+                            <h3>{{ $stat['count_lampu'] }}</h3>
 
                             <p>Jenis Lampu</p>
                         </div>
@@ -94,8 +94,8 @@
             </div>
             <!-- /.row -->
 
-            <div class="row">
-                <div class="col bg-light m-2 p-2 rounded shadow-sm">
+            {{-- <div class="row">
+                <div class="col bg-light mx-2 mb-2 p-2 rounded shadow-sm">
                     <div class="row">
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -119,88 +119,101 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row">
-                <div class="col-8">
+                <div class="col">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Map View</h3>
                         </div>
-                        <div class="card-body p-0">
-                            <div class="d-md-flex">
-                                <div class="p-1 flex-fill" style="overflow: hidden">
-                                    <div id="map"></div>
+                        <div wire:ignore>
+                            <div class="card-body p-0">
+                                <div class="d-md-flex">
+                                    <div class="p-1 flex-fill" style="overflow: hidden">
+                                        <div id="map"></div>
+                                    </div>
+
+                                    {{-- <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
+                                        <div class="description-block mb-4">
+                                            <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
+                                            <h5 class="description-header">8390</h5>
+                                            <span class="description-text">Visits</span>
+                                        </div>
+                                        <!-- /.description-block -->
+                                        <div class="description-block mb-4">
+                                            <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+                                            <h5 class="description-header">30%</h5>
+                                            <span class="description-text">Referrals</span>
+                                        </div>
+                                        <!-- /.description-block -->
+                                        <div class="description-block">
+                                            <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+                                            <h5 class="description-header">70%</h5>
+                                            <span class="description-text">Organic</span>
+                                        </div>
+                                        <!-- /.description-block -->
+                                    </div><!-- /.card-pane-right --> --}}
                                 </div>
 
-                                <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
-                                    <div class="description-block mb-4">
-                                        <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                                        <h5 class="description-header">8390</h5>
-                                        <span class="description-text">Visits</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                    <div class="description-block mb-4">
-                                        <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                                        <h5 class="description-header">30%</h5>
-                                        <span class="description-text">Referrals</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                    <div class="description-block">
-                                        <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                                        <h5 class="description-header">70%</h5>
-                                        <span class="description-text">Organic</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div><!-- /.card-pane-right -->
                             </div>
-
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <!-- Info Boxes Style 2 -->
-                    <div class="info-box mb-3 bg-warning">
-                        <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+            </div>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">Inventory</span>
-                            <span class="info-box-number">5,200</span>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Tiang</h3>
                         </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-success">
-                        <span class="info-box-icon"><i class="far fa-heart"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Mentions</span>
-                            <span class="info-box-number">92,050</span>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="tablePanel" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Tiang</th>
+                                        <th>Jalan</th>
+                                        <th>Panel</th>
+                                        <th>Kategori</th>
+                                        <th>Jenis</th>
+                                        <th>Lengan</th>
+                                        <th>Jaringan</th>
+                                        <th>Lampu</th>
+                                        <th>Kordinat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($this->tiangs as $data)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $data->kode }}</td>
+                                            <td>{{ $data->panel->jalan->nama }}</td>
+                                            <td>{{ $data->panel->kode }}</td>
+                                            <td>{{ $data->kategori }}</td>
+                                            <td>{{ $data->jenis }}</td>
+                                            <td>{{ $data->lengan }} Lengan</td>
+                                            <td>{{ $data->jaringan }}</td>
+                                            <td>{{ $data->lampu }}</td>
+                                            <td>{{ $data->lat }}, {{ $data->long }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="mt-2">
+                                {{ $this->tiangs->links() }}
+                            </div>
                         </div>
-                        <!-- /.info-box-content -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-danger">
-                        <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Downloads</span>
-                            <span class="info-box-number">114,381</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-info">
-                        <span class="info-box-icon"><i class="far fa-comment"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Direct Messages</span>
-                            <span class="info-box-number">163,921</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
+                    <!-- /.card -->
                 </div>
+                <!-- /.col -->
             </div>
         </div><!--/. container-fluid -->
     </section>
@@ -208,14 +221,21 @@
 </div>
 @push('scripts')
     <script>
-        var map = L.map('map').setView([51.505, -0.09], 13);
+        var map = L.map('map').setView([-8.584587387437304, 116.10220505631855], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        L.marker([51.5, -0.09]).addTo(map)
-            .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-            .openPopup();
+        const tiangs = {!! json_encode($tiangs) !!};
+
+
+        tiangs.forEach(data => {
+            L.marker([data.lat, data.long]).addTo(map)
+                .bindPopup(
+                    '<h3>' + data.kode + '</h3>' + '<p>Kategori : ' + data.kategori + '<br> Jenis : ' + data.jenis +
+                    '</p>'
+                );
+        });
     </script>
 @endpush

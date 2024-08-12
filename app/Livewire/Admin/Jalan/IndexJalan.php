@@ -2,15 +2,24 @@
 
 namespace App\Livewire\Admin\Jalan;
 
+use App\Imports\JalanImport;
 use App\Models\Jalan;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 #[Title('Jalan')]
 class IndexJalan extends Component
 {
+    use WithFileUploads;
+
     public $search = '';
+
+    #[Validate('required|file|max:2000')]
+    public $fileJalan;
 
     public function render()
     {
@@ -31,5 +40,14 @@ class IndexJalan extends Component
             //destroy
             $jalan->delete();
         }
+    }
+
+    public function addJalan()
+    {
+        $this->validate();
+
+        Excel::import(new JalanImport(), $this->fileJalan);
+
+        return redirect('/admin/jalan')->with('success', 'All good!');
     }
 }

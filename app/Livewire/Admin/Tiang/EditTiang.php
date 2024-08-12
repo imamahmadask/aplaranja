@@ -54,7 +54,8 @@ class EditTiang extends Component
             'lengan' => $this->lengan,
             'tahun_pengadaan' => $this->tahun_pengadaan,
             'jaringan' => $this->jaringan,
-            'kordinat' => $this->kordinat,
+            'lat' => $this->lat,
+            'long' => $this->long,
             'panel_id' => $this->panel_id,
             'lampu' => $this->lampu,
         ]);

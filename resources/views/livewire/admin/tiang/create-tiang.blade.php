@@ -63,8 +63,8 @@
                                     <label for="lengan">Jumlah Lengan</label>
                                     <select name="lengan" wire:model="lengan" class="form-control">
                                         <option value="">Pilih Lengan</option>
-                                        <option value="1 Lengan">1 Lengan</option>
-                                        <option value="2 Lengan">2 Lengan</option>
+                                        <option value="1">1 Lengan</option>
+                                        <option value="2">2 Lengan</option>
                                     </select>
                                 </div>
 
