@@ -47,6 +47,7 @@
                                         <option value="">Pilih kategori</option>
                                         <option value="Ornamen">Ornamen</option>
                                         <option value="Tiang">Tiang</option>
+                                        <option value="Tiang Gawang">Tiang Gawang</option>
                                     </select>
                                 </div>
 
@@ -67,6 +68,8 @@
                                         <option value="">Pilih Lengan</option>
                                         <option value="1">1 Lengan</option>
                                         <option value="2">2 Lengan</option>
+                                        <option value="3">3 Lengan</option>
+                                        <option value="8">8 Lengan</option>
                                     </select>
                                 </div>
 
