@@ -35,6 +35,17 @@
                         <form wire:submit="addTiang">
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label for="panel">Panel</label>
+                                    <select name="panel_id" wire:model.live="panel_id" class="form-control">
+                                        <option value="">Pilih Panel</option>
+                                        @foreach ($panels as $panel)
+                                            <option value={{ $panel->id }}>{{ $panel->kode }} -
+                                                {{ $panel->jalan->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="kode">Kode</label>
                                     <input type="text" wire:model="kode" class="form-control" id="kode"
                                         placeholder="Masukkan Kode Tiang">
@@ -108,17 +119,6 @@
                                         <option value="">Pilih Jenis Lampu</option>
                                         <option value="LED">LED</option>
                                         <option value="Son-T">Son-T</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="panel">Panel</label>
-                                    <select name="panel_id" wire:model="panel_id" class="form-control">
-                                        <option value="">Pilih Panel</option>
-                                        @foreach ($panels as $panel)
-                                            <option value={{ $panel->id }}>{{ $panel->kode }} -
-                                                {{ $panel->jalan->nama }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>

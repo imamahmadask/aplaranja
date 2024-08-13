@@ -14,7 +14,7 @@ class EditPanel extends Component
     #[Validate('required')]
     public $panelId, $kode, $kwh, $idpel, $saklar, $jaringan, $kordinat, $jalan_id;
 
-    public $jalans, $lat, $long;
+    public $jalans, $lat, $long, $kode_jalan;
 
     public function render()
     {
@@ -26,7 +26,8 @@ class EditPanel extends Component
         $panel = Panel::find($id);
 
         $this->panelId = $panel->id;
-        $this->kode = $panel->kode;
+        $this->kode = substr($panel->kode, strpos($panel->kode, '-') + 1);
+        $this->kode_jalan = substr($panel->kode, 0, strpos($panel->kode, '-'));
         $this->kwh = $panel->kwh;
         $this->idpel = $panel->idpel;
         $this->jaringan = $panel->jaringan;
@@ -46,7 +47,7 @@ class EditPanel extends Component
         $this->getKordinat($this->kordinat);
 
         $panel->update([
-            'kode' => $this->kode,
+            'kode' => $this->kode_jalan.'-'.$this->kode,
             'kwh' => $this->kwh,
             'idpel' => $this->idpel,
             'jaringan' => $this->jaringan,
@@ -65,5 +66,11 @@ class EditPanel extends Component
         $pecah = explode(", ", $value);
         $this->lat = $pecah[0];
         $this->long = $pecah[1];
+    }
+
+    public function updatedJalanId($value)
+    {
+        $jalan = Jalan::find($value);
+        $this->kode_jalan = $jalan->kode;
     }
 }

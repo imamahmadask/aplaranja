@@ -33,8 +33,18 @@
 
                         <!-- form start -->
                         <form wire:submit="updatePanel">
-                            <input type="hidden" name="" wire:model="panelId">
+                            <input type="hidden" name="" wire:model.live="panelId">
                             <div class="card-body">
+                                <div class="form-group">
+                                    <label for="lebar">Jalan</label>
+                                    <select name="jalan_id" wire:model="jalan_id" class="form-control">
+                                        <option value="">Pilih Jalan</option>
+                                        @foreach ($jalans as $jalan)
+                                            <option value={{ $jalan->id }}>{{ $jalan->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="kode">Kode</label>
                                     <input type="text" wire:model="kode" class="form-control" id="kode"
@@ -77,15 +87,6 @@
                                         placeholder="Masukkan Kordinat">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="lebar">Jalan</label>
-                                    <select name="jalan_id" wire:model="jalan_id" class="form-control">
-                                        <option value="">Pilih Jalan</option>
-                                        @foreach ($jalans as $jalan)
-                                            <option value={{ $jalan->id }}>{{ $jalan->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
                             <!-- /.card-body -->
 

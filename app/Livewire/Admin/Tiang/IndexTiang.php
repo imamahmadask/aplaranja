@@ -27,7 +27,7 @@ class IndexTiang extends Component
     #[Computed()]
     public function tiangs()
     {
-        return Tiang::all();
+        return Tiang::orderBy('kode', 'asc')->get();
     }
 
     public function deleteTiang(Tiang $tiang)

@@ -14,7 +14,7 @@ class CreateTiang extends Component
     #[Validate('required')]
     public $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu, $posisi_tiang;
 
-    public $panels, $lat, $long;
+    public $panels, $lat, $long, $kode_panel;
 
     public function render()
     {
@@ -28,7 +28,7 @@ class CreateTiang extends Component
         $this->getKordinat($this->kordinat);
 
         Tiang::create([
-            'kode' => $this->kode,
+            'kode' => $this->kode_panel.'-'.$this->kode,
             'kategori' => $this->kategori,
             'jenis' => $this->jenis,
             'lengan' => $this->lengan,
@@ -48,12 +48,18 @@ class CreateTiang extends Component
 
     public function mount()
     {
-        $this->panels = Panel::all();
+        $this->panels = Panel::orderBy('kode', 'asc')->get();
     }
 
     public function getKordinat($value){
         $pecah = explode(", ", $value);
         $this->lat = $pecah[0];
         $this->long = $pecah[1];
+    }
+
+    public function updatedPanelId($value)
+    {
+        $panel = Panel::find($value);
+        $this->kode_panel = $panel->kode;
     }
 }

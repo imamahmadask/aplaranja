@@ -72,12 +72,12 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Kode Panel</th>
+                                        <th>Jalan</th>
                                         <th>Kwh</th>
                                         <th>Idpel</th>
                                         <th>Jaringan</th>
                                         <th>Saklar</th>
                                         <th>Kordinat</th>
-                                        <th>Jalan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -94,6 +94,9 @@
                                                 {{ $panel->kode }}
                                             </td>
                                             <td>
+                                                {{ $panel->jalan->nama }}
+                                            </td>
+                                            <td>
                                                 {{ $panel->kwh }}
                                             </td>
                                             <td>
@@ -107,9 +110,6 @@
                                             </td>
                                             <td>
                                                 {{ $panel->lat }}, {{ $panel->long }}
-                                            </td>
-                                            <td>
-                                                {{ $panel->jalan->nama }}
                                             </td>
                                             <td>
                                                 <a href="panel/{{ $panel->id }}/edit"

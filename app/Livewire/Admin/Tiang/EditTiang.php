@@ -14,7 +14,7 @@ class EditTiang extends Component
     #[Validate('required')]
     public $tiangId, $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu, $posisi_tiang;
 
-    public $panels, $lat, $long;
+    public $panels, $lat, $long, $kode_panel;
 
     public function render()
     {
@@ -26,7 +26,8 @@ class EditTiang extends Component
         $tiang = Tiang::find($id);
 
         $this->tiangId = $tiang->id;
-        $this->kode = $tiang->kode;
+        $this->kode = substr($tiang->kode, strrpos($tiang->kode, '-') + 1);
+        $this->kode_panel = substr($tiang->kode, 0, strrpos($tiang->kode, '-'));
         $this->kategori = $tiang->kategori;
         $this->jenis = $tiang->jenis;
         $this->lengan = $tiang->lengan;
@@ -37,7 +38,7 @@ class EditTiang extends Component
         $this->lampu = $tiang->lampu;
         $this->posisi_tiang = $tiang->posisi_tiang;
 
-        $this->panels = Panel::all();
+        $this->panels = Panel::orderBy('kode', 'asc')->get();
     }
 
     public function updateTiang()
@@ -49,7 +50,7 @@ class EditTiang extends Component
         $this->getKordinat($this->kordinat);
 
         $tiang->update([
-            'kode' => $this->kode,
+            'kode' => $this->kode_panel.'-'.$this->kode,
             'kategori' => $this->kategori,
             'jenis' => $this->jenis,
             'lengan' => $this->lengan,
@@ -71,5 +72,11 @@ class EditTiang extends Component
         $pecah = explode(", ", $value);
         $this->lat = $pecah[0];
         $this->long = $pecah[1];
+    }
+
+    public function updatedPanelId($value)
+    {
+        $panel = Panel::find($value);
+        $this->kode_panel = $panel->kode;
     }
 }

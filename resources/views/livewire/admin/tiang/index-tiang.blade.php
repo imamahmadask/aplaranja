@@ -75,11 +75,10 @@
                                         <th>Kategori</th>
                                         <th>Jenis</th>
                                         <th>Lengan</th>
-                                        <th>Tahun Pengadaan</th>
+                                        <th>Pengadaan</th>
                                         <th>Jaringan</th>
-                                        <th>Posisi Tiang</th>
+                                        <th>Posisi</th>
                                         <th>Kordinat</th>
-                                        <th>Panel</th>
                                         <th>Lampu</th>
                                         <th>Action</th>
                                     </tr>
@@ -116,9 +115,6 @@
                                             </td>
                                             <td>
                                                 {{ $tiang->lat }}, {{ $tiang->long }}
-                                            </td>
-                                            <td>
-                                                {{ $tiang->panel->kode }}
                                             </td>
                                             <td>
                                                 {{ $tiang->lampu }}
