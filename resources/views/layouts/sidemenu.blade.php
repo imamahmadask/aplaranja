@@ -115,12 +115,57 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('lampu.index') }}"
                         class="nav-link {{ Request::routeIs('lampu.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-lightbulb"></i>
                         <p>
                             Lampu
+                        </p>
+                    </a>
+                </li> --}}
+                <li
+                    class="nav-item {{ Request::routeIs('riwayatPanel.*') || Request::routeIs('riwayatTiang*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::routeIs('riwayatPanel.*') || Request::routeIs('riwayatTiang*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-folder"></i>
+                        <p>
+                            Riwayat
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('riwayatPanel.index') }}"
+                                class="nav-link {{ Request::routeIs('riwayatPanel.*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Riwayat Panel</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('riwayatTiang.index') }}"
+                                class="nav-link {{ Request::routeIs('riwayatTiang.*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Riwayat Tiang</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('regu.index') }}"
+                        class="nav-link {{ Request::routeIs('regu.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Regu
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('info.index') }}"
+                        class="nav-link {{ Request::routeIs('info.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Info Umum
                         </p>
                     </a>
                 </li>

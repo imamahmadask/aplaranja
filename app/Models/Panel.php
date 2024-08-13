@@ -26,4 +26,9 @@ class Panel extends Model
     {
         return $this->hasMany(Tiang::class);
     }
+
+    public function riwayat(): HasMany
+    {
+        return $this->hasMany(RiwayatPanel::class);
+    }
 }
