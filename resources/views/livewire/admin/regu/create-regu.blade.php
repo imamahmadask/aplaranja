@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah Info</h1>
+                    <h1 class="m-0">Tambah Regu</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('info.index') }}">Info</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('regu.index') }}">Regu</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ol>
                 </div><!-- /.col -->
@@ -27,36 +27,34 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Form Tambah Info</h3>
+                            <h3 class="card-title">Form Tambah Regu</h3>
                         </div>
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form wire:submit="addInfo">
+                        <form wire:submit="addRegu">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="nama">Nama Item</label>
+                                    <label for="kode">Kode</label>
+                                    <input type="text" wire:model="kode" class="form-control" id="kode"
+                                        placeholder="Masukkan Kode Regu">
+                                    @error('kode')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama">Nama</label>
                                     <input type="text" wire:model="nama" class="form-control" id="nama"
-                                        placeholder="Masukkan Nama Item">
+                                        placeholder="Masukkan Nama Regu">
                                     @error('nama')
                                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="deskripsi">Deskripsi</label>
-                                    <input type="text" wire:model="deskripsi" class="form-control" id="deskripsi"
-                                        placeholder="Masukkan Deskripsi Regu">
-                                    @error('deskripsi')
-                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="gambar">Gambar</label>
-                                    <input type="file" wire:model="gambar" class="form-control" id="gambar">
-                                    @if ($gambar)
-                                        <img src="{{ $gambar->temporaryUrl() }}" width="200px" class="mt-2">
-                                    @endif
-                                    @error('gambar')
+                                    <label for="jml_anggota">Jumlah Anggota</label>
+                                    <input type="number" wire:model="jml_anggota" class="form-control" id="jml_anggota"
+                                        placeholder="Masukkan Jumlah Anggota">
+                                    @error('jml_anggota')
                                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                                     @enderror
                                 </div>
