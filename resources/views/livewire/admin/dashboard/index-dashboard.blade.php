@@ -78,14 +78,14 @@
                     <!-- small card -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ $stat['count_lampu'] }}</h3>
+                            <h3>{{ $stat['count_regu'] }}</h3>
 
-                            <p>Jenis Lampu</p>
+                            <p>Jumlah Regu</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-lightbulb"></i>
+                            <i class="fas fa-users"></i>
                         </div>
-                        <a href="{{ route('lampu.index') }}" class="small-box-footer">
+                        <a href="{{ route('regu.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -120,6 +120,51 @@
                     </div>
                 </div>
             </div> --}}
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Rekap Tiang</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table id="tablePanel" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Jalan</th>
+                                        <th>Ruas Jalan</th>
+                                        <th>Jml Panel</th>
+                                        <th>Jml Tiang</th>
+                                        <th>Tiang Galpanis</th>
+                                        <th>Tiang Besi</th>
+                                        <th>Tiang Dekor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($this->tiangs as $data)
+                                        <tr>
+                                            <td>{{ $data->kode_jalan }}</td>
+                                            <td>{{ $data->jalan }}</td>
+                                            <td>{{ $data->jml_panel }}</td>
+                                            <td>{{ $data->jml_tiang }}</td>
+                                            <td>{{ $data->jml_tiang_galpanis }}</td>
+                                            <td>{{ $data->jml_tiang_besi }}</td>
+                                            <td>{{ $data->jml_tiang_dekor }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="mt-2">
+                                {{ $this->tiangs->links() }}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
 
             <div class="row">
                 <div class="col">
@@ -162,61 +207,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Data Tiang</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table id="tablePanel" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Kode Tiang</th>
-                                        <th>Jalan</th>
-                                        <th>Panel</th>
-                                        <th>Kategori</th>
-                                        <th>Jenis</th>
-                                        <th>Lengan</th>
-                                        <th>Jaringan</th>
-                                        <th>Posisi Tiang</th>
-                                        <th>Lampu</th>
-                                        <th>Kordinat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @foreach ($this->tiangs as $data)
-                                        <tr>
-                                            <td>{{ $i++ }}</td>
-                                            <td>{{ $data->kode }}</td>
-                                            <td>{{ $data->panel->jalan->nama }}</td>
-                                            <td>{{ $data->panel->kode }}</td>
-                                            <td>{{ $data->kategori }}</td>
-                                            <td>{{ $data->jenis }}</td>
-                                            <td>{{ $data->lengan }} Lengan</td>
-                                            <td>{{ $data->jaringan }}</td>
-                                            <td>{{ $data->posisi_tiang }}</td>
-                                            <td>{{ $data->lampu }}</td>
-                                            <td>{{ $data->lat }}, {{ $data->long }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="mt-2">
-                                {{ $this->tiangs->links() }}
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
-            </div>
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->

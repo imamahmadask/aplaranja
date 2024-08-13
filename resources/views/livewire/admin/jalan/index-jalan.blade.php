@@ -87,7 +87,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Kode Jalan</th>
-                                        <th>Nama Jalan</th>
+                                        <th>Ruas Jalan</th>
                                         <th>Panjang Jalan</th>
                                         <th>Lebar Jalan</th>
                                         <th>Action</th>
