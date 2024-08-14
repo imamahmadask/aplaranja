@@ -66,8 +66,8 @@
                             <h3 class="card-title">Data Panel</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="tablePanel" class="table table-bordered table-hover">
+                        <div class="card-body table-responsive p-0">
+                            <table id="tablePanel" class="table table-head-fixed table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -78,6 +78,7 @@
                                         <th>Jaringan</th>
                                         <th>Saklar</th>
                                         <th>Kordinat</th>
+                                        <th>Riwayat</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -112,6 +113,9 @@
                                                 {{ $panel->lat }}, {{ $panel->long }}
                                             </td>
                                             <td>
+                                                {{ $panel->riwayat->count() }}
+                                            </td>
+                                            <td>
                                                 <a href="panel/{{ $panel->id }}/edit"
                                                     class="btn btn-sm btn-primary mx-2">
                                                     <i class="fas fa-edit"></i>
@@ -125,6 +129,9 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <td colspan="6">Total <strong>{{ $this->panels->count() }}</strong></td>
+                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->

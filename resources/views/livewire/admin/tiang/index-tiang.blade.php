@@ -67,7 +67,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
-                            <table id="tablePanel" class="table table-bordered table-hover">
+                            <table id="tableTiang" class="table table-head-fixed table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -78,8 +78,9 @@
                                         <th>Pengadaan</th>
                                         <th>Jaringan</th>
                                         <th>Posisi</th>
-                                        <th>Kordinat</th>
                                         <th>Lampu</th>
+                                        <th>Kordinat</th>
+                                        <th>Riwayat</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -114,10 +115,13 @@
                                                 {{ $tiang->posisi_tiang }}
                                             </td>
                                             <td>
+                                                {{ $tiang->lampu }}
+                                            </td>
+                                            <td>
                                                 {{ $tiang->lat }}, {{ $tiang->long }}
                                             </td>
                                             <td>
-                                                {{ $tiang->lampu }}
+                                                {{ $tiang->riwayat->count() }}
                                             </td>
                                             <td>
                                                 <a href="{{ route('tiang.edit', ['id' => $tiang->id]) }}"
@@ -133,6 +137,9 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <td colspan="12">Total <strong>{{ $this->tiangs->count() }}</strong></td>
+                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->

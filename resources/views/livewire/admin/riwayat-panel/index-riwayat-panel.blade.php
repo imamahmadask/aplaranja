@@ -51,7 +51,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-head-fixed table-hover text-nowrap">
+                            <table class="table table-head-fixed table-hover text-nowrap" id="tableRiwayatPanel">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -106,7 +106,7 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <td colspan="6">Total <strong>{{ $this->riwayatPanels->count() }}</strong></td>
+                                    <td colspan="8">Total <strong>{{ $this->riwayatPanels->count() }}</strong></td>
                                 </tfoot>
                             </table>
                         </div>
