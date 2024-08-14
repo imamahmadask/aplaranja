@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('jenis');
             $table->string('kerusakan');
             $table->string('perbaikan');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->integer('tiang_id');
             $table->integer('regu_id');
             $table->timestamps();
