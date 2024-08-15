@@ -13,6 +13,8 @@ class CreateJalan extends Component
     #[Validate('required')]
     public $kode, $nama, $panjang, $lebar;
 
+    public $kordinat, $lat, $long;
+
     public function render()
     {
         return view('livewire.admin.jalan.create-jalan');
@@ -22,15 +24,25 @@ class CreateJalan extends Component
     {
         $this->validate();
 
+        $this->getKordinat($this->kordinat);
+
         Jalan::create([
             'kode' => $this->kode,
             'nama' => $this->nama,
             'panjang' => $this->panjang,
             'lebar' => $this->lebar,
+            'lat' => $this->lat,
+            'long' => $this->long,
         ]);
 
         $this->reset();
 
         $this->redirect('/admin/jalan');
+    }
+
+    public function getKordinat($value){
+        $pecah = explode(", ", $value);
+        $this->lat = $pecah[0];
+        $this->long = $pecah[1];
     }
 }

@@ -125,7 +125,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Rekap Tiang</h3>
+                            <h3 class="card-title">Data Rekap Tiang Per Jalan</h3>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 250px;">
+                                    <input type="text" wire:model.live="search_tiang" name="search_tiang"
+                                        class="form-control float-right" placeholder="Search nama jalan">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
@@ -142,7 +155,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($this->tiangs as $data)
+                                    @foreach ($this->jalans as $data)
                                         <tr>
                                             <td>{{ $data->kode_jalan }}</td>
                                             <td>{{ $data->jalan }}</td>
@@ -154,9 +167,18 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <td><b>Total</b></td>
+                                    <td><b>{{ $this->total_jalans->total_jalan }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_panel }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_tiang }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_tiang_galpanis }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_tiang_besi }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_tiang_dekor }}</b></td>
+                                </tfoot>
                             </table>
-                            <div class="mt-2">
-                                {{ $this->tiangs->links() }}
+                            <div class="mx-4 my-2">
+                                {{ $this->jalans->links() }}
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -219,14 +241,15 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        const tiangs = {!! json_encode($tiangs) !!};
+        const jalans = {!! json_encode($jalans) !!};
 
-
-        tiangs.forEach(data => {
+        jalans.forEach(data => {
             L.marker([data.lat, data.long]).addTo(map)
                 .bindPopup(
-                    '<h3>' + data.kode + '</h3>' + '<p>Kategori : ' + data.kategori + '<br> Jenis : ' + data.jenis +
-                    '</p>'
+                    '<h3>' + data.nama + '</h3>' +
+                    '<p>Kode Jalan : ' + data.kode + '</p>' +
+                    '<p>Jumlah Panel: ' + data.panel_count + '</p>' +
+                    '<p>Jumlah Tiang: ' + data.tiang_count + '</p>'
                 );
         });
     </script>

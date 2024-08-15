@@ -90,6 +90,7 @@
                                         <th>Ruas Jalan</th>
                                         <th>Panjang Jalan</th>
                                         <th>Lebar Jalan</th>
+                                        <th>Kordinat</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -112,6 +113,7 @@
                                                 {{ $jalan->panjang }} meter
                                             </td>
                                             <td>{{ $jalan->lebar }} meter</td>
+                                            <td>{{ $jalan->lat }}, {{ $jalan->long }}</td>
                                             <td>
                                                 <a href="jalan/{{ $jalan->id }}/edit"
                                                     class="btn btn-sm btn-primary mx-2">

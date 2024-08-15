@@ -55,6 +55,11 @@
                                     <input type="number" wire:model="lebar" class="form-control" id="lebar"
                                         placeholder="Masukkan Lebar Jalan">
                                 </div>
+                                <div class="form-group">
+                                    <label for="kordinat">Kordinat</label>
+                                    <input type="text" wire:model="kordinat" class="form-control" id="kordinat"
+                                        placeholder="Masukkan Kordinat Jalan">
+                                </div>
                             </div>
                             <!-- /.card-body -->
 

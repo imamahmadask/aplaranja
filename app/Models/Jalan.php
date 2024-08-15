@@ -13,7 +13,7 @@ class Jalan extends Model
     protected $table = 'jalans';
 
     protected $fillable = [
-        'kode', 'nama', 'panjang', 'lebar'
+        'kode', 'nama', 'panjang', 'lebar', 'lat', 'long'
     ];
 
     public function panel(): HasMany

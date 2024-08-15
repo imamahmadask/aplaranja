@@ -58,6 +58,8 @@
                                         <th>Kode</th>
                                         <th>Nama Regu</th>
                                         <th class="text-center">Jumlah Anggota</th>
+                                        <th>Riwayat Panel</th>
+                                        <th>Riwayat Tiang</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,6 +80,12 @@
                                             </td>
                                             <td class="text-center">
                                                 {{ $regu->jml_anggota }}
+                                            </td>
+                                            <td>
+                                                {{ $regu->riwayatPanel->count() }}
+                                            </td>
+                                            <td>
+                                                {{ $regu->riwayatTiang->count() }}
                                             </td>
                                             <td>
                                                 <a href="regu/{{ $regu->id }}/edit"
