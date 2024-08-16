@@ -56,9 +56,10 @@ class IndexDashboard extends Component
                 jalans.kode as kode_jalan,
                 count(DISTINCT panels.id) as jml_panel,
                 count(tiangs.id) as jml_tiang,
-                SUM(CASE WHEN tiangs.jenis = "galpanis" THEN 1 ELSE 0 END) as jml_tiang_galpanis,
-                SUM(CASE WHEN tiangs.jenis = "besi" THEN 1 ELSE 0 END) as jml_tiang_besi,
-                SUM(CASE WHEN tiangs.jenis = "dekoratif" THEN 1 ELSE 0 END) as jml_tiang_dekor
+                SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as jml_1_lengan,
+                SUM(CASE WHEN tiangs.lengan = 2 THEN 1 ELSE 0 END) as jml_2_lengan,
+                SUM(CASE WHEN tiangs.lengan > 2 THEN 1 ELSE 0 END) as jml_lebih_lengan,
+                SUM(tiangs.lengan) as total_lampu
             '))
             ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
             ->leftJoin('tiangs', 'panels.id', '=', 'tiangs.panel_id')
@@ -75,9 +76,10 @@ class IndexDashboard extends Component
             count(DISTINCT jalans.id) as total_jalan,
             count(DISTINCT panels.id) as total_panel,
             count(tiangs.id) as total_tiang,
-            SUM(CASE WHEN tiangs.jenis = "galpanis" THEN 1 ELSE 0 END) as total_tiang_galpanis,
-            SUM(CASE WHEN tiangs.jenis = "besi" THEN 1 ELSE 0 END) as total_tiang_besi,
-            SUM(CASE WHEN tiangs.jenis = "dekoratif" THEN 1 ELSE 0 END) as total_tiang_dekor
+            SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as total_1_lengan,
+            SUM(CASE WHEN tiangs.lengan = 2 THEN 1 ELSE 0 END) as total_2_lengan,
+            SUM(CASE WHEN tiangs.lengan > 2 THEN 1 ELSE 0 END) as total_lebih_lengan,
+            SUM(tiangs.lengan) as total_lampu
         '))
         ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
         ->leftJoin('tiangs', 'panels.id', '=', 'tiangs.panel_id')

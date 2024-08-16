@@ -149,9 +149,10 @@
                                         <th>Ruas Jalan</th>
                                         <th>Jml Panel</th>
                                         <th>Jml Tiang</th>
-                                        <th>Tiang Galpanis</th>
-                                        <th>Tiang Besi</th>
-                                        <th>Tiang Dekor</th>
+                                        <th>1 Lengan</th>
+                                        <th>2 Lengan</th>
+                                        <th>> 2 Lengan</th>
+                                        <th>Jml Lampu</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -161,9 +162,10 @@
                                             <td>{{ $data->jalan }}</td>
                                             <td>{{ $data->jml_panel }}</td>
                                             <td>{{ $data->jml_tiang }}</td>
-                                            <td>{{ $data->jml_tiang_galpanis }}</td>
-                                            <td>{{ $data->jml_tiang_besi }}</td>
-                                            <td>{{ $data->jml_tiang_dekor }}</td>
+                                            <td>{{ $data->jml_1_lengan }}</td>
+                                            <td>{{ $data->jml_2_lengan }}</td>
+                                            <td>{{ $data->jml_lebih_lengan }}</td>
+                                            <td>{{ $data->total_lampu }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -172,9 +174,10 @@
                                     <td><b>{{ $this->total_jalans->total_jalan }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_panel }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_tiang }}</b></td>
-                                    <td><b>{{ $this->total_jalans->total_tiang_galpanis }}</b></td>
-                                    <td><b>{{ $this->total_jalans->total_tiang_besi }}</b></td>
-                                    <td><b>{{ $this->total_jalans->total_tiang_dekor }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_1_lengan }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_2_lengan }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_lebih_lengan }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_lampu }}</b></td>
                                 </tfoot>
                             </table>
                             <div class="mx-4 my-2">
