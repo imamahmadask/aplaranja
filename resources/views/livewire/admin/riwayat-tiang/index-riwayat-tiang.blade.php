@@ -59,6 +59,8 @@
                                         <th>Tanggal</th>
                                         <th>Kerusakan</th>
                                         <th>Perbaikan</th>
+                                        <th>Alat</th>
+                                        <th>Bahan</th>
                                         <th>Keterangan</th>
                                         <th>Regu</th>
                                         <th>Action</th>
@@ -84,6 +86,12 @@
                                             </td>
                                             <td>
                                                 {{ $riwayatTiang->perbaikan }}
+                                            </td>
+                                            <td>
+                                                {{ $riwayatPanel->alat }}
+                                            </td>
+                                            <td>
+                                                {{ $riwayatPanel->bahan }}
                                             </td>
                                             <td>
                                                 {{ $riwayatTiang->keterangan }}

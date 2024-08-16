@@ -91,6 +91,22 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="alat">Alat</label>
+                                    <input type="text" wire:model="alat" class="form-control" id="alat"
+                                        placeholder="Masukkan Jenis Alat">
+                                    @error('alat')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="bahan">Bahan</label>
+                                    <input type="text" wire:model="bahan" class="form-control" id="bahan"
+                                        placeholder="Masukkan Jenis Bahan">
+                                    @error('bahan')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
                                     <textarea wire:model="keterangan" class="form-control" name="keterangan" id="keterangan" cols="10" rows="5"></textarea>
                                     @error('keterangan')

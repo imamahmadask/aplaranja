@@ -13,7 +13,7 @@ use Livewire\Component;
 class CreateRiwayatPanel extends Component
 {
     #[Validate('required')]
-    public $tanggal, $jenis, $kerusakan, $perbaikan, $panel_id, $regu_id;
+    public $tanggal, $jenis, $kerusakan, $perbaikan, $panel_id, $regu_id, $alat, $bahan;
 
     public $panels, $regus, $keterangan;
 
@@ -34,6 +34,8 @@ class CreateRiwayatPanel extends Component
             'keterangan' => $this->keterangan,
             'panel_id' => $this->panel_id,
             'regu_id' => $this->regu_id,
+            'alat' => $this->alat,
+            'bahan' => $this->bahan,
         ]);
 
         $this->reset();

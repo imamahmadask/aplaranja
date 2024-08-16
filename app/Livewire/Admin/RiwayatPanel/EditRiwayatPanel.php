@@ -13,7 +13,7 @@ use Livewire\Component;
 class EditRiwayatPanel extends Component
 {
     #[Validate('required')]
-    public $riwayat_panel_id, $tanggal, $jenis, $kerusakan, $perbaikan, $panel_id, $regu_id;
+    public $riwayat_panel_id, $tanggal, $jenis, $kerusakan, $perbaikan, $panel_id, $regu_id, $alat, $bahan;
 
     public $panels, $regus, $keterangan;
 
@@ -33,6 +33,8 @@ class EditRiwayatPanel extends Component
         $this->jenis = $riwayat_panel->jenis;
         $this->kerusakan = $riwayat_panel->kerusakan;
         $this->perbaikan = $riwayat_panel->perbaikan;
+        $this->alat = $riwayat_panel->alat;
+        $this->bahan = $riwayat_panel->bahan;
 
         $this->panels = Panel::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();
@@ -52,6 +54,8 @@ class EditRiwayatPanel extends Component
             'keterangan' => $this->keterangan,
             'panel_id' => $this->panel_id,
             'regu_id' => $this->regu_id,
+            'alat' => $this->alat,
+            'bahan' => $this->bahan,
         ]);
 
         $this->reset();

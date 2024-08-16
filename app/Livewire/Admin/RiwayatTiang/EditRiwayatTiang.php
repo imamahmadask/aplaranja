@@ -13,7 +13,7 @@ use Livewire\Component;
 class EditRiwayatTiang extends Component
 {
     #[Validate('required')]
-    public $riwayat_tiang_id, $tanggal, $jenis, $kerusakan, $perbaikan, $tiang_id, $regu_id;
+    public $riwayat_tiang_id, $tanggal, $jenis, $kerusakan, $perbaikan, $tiang_id, $regu_id, $alat, $bahan;
 
     public $tiangs, $regus, $keterangan;
 
@@ -33,6 +33,8 @@ class EditRiwayatTiang extends Component
         $this->jenis = $riwayat_tiang->jenis;
         $this->kerusakan = $riwayat_tiang->kerusakan;
         $this->perbaikan = $riwayat_tiang->perbaikan;
+        $this->alat = $riwayat_tiang->alat;
+        $this->bahan = $riwayat_tiang->bahan;
 
         $this->tiangs = Tiang::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();
@@ -52,6 +54,8 @@ class EditRiwayatTiang extends Component
             'keterangan' => $this->keterangan,
             'tiang_id' => $this->tiang_id,
             'regu_id' => $this->regu_id,
+            'alat' => $this->alat,
+            'bahan' => $this->bahan,
         ]);
 
         $this->reset();

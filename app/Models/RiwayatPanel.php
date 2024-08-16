@@ -13,7 +13,7 @@ class RiwayatPanel extends Model
     protected $table = 'riwayat_panels';
 
     protected $fillable = [
-        'tanggal', 'jenis', 'kerusakan', 'perbaikan', 'keterangan', 'panel_id', 'regu_id'
+        'tanggal', 'jenis', 'kerusakan', 'perbaikan', 'keterangan', 'panel_id', 'regu_id', 'alat', 'bahan'
     ];
 
     public function regu() :BelongsTo

@@ -13,7 +13,7 @@ class RiwayatTiang extends Model
     protected $table = 'riwayat_tiangs';
 
     protected $fillable = [
-        'tanggal', 'jenis', 'kerusakan', 'perbaikan', 'keterangan', 'tiang_id', 'regu_id'
+        'tanggal', 'jenis', 'kerusakan', 'perbaikan', 'keterangan', 'tiang_id', 'regu_id', 'alat', 'bahan'
     ];
 
     public function regu() :BelongsTo
