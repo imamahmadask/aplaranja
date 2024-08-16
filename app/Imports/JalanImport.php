@@ -22,11 +22,17 @@ class JalanImport implements ToModel, WithHeadingRow, WithUpserts
 
     public function model(array $row)
     {
+        $pecah = explode(", ", $row['kordinat']);
+        $lat = $pecah[0];
+        $long = $pecah[1];
+
         return new Jalan([
             'kode'     => $row['kode'],
             'nama'    => $row['nama'],
             'panjang' => $row['panjang'],
             'lebar' => $row['lebar'],
+            'lat' => $long,
+            'long' => $lat,
         ]);
     }
 }

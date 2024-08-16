@@ -9,12 +9,15 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 #[Title('Tiang')]
 class IndexTiang extends Component
 {
     use WithFileUploads;
+    use WithPagination;
+    public $perPage = 50;
 
     #[Validate('required|file|max:2000')]
     public $fileTiang;
@@ -27,7 +30,7 @@ class IndexTiang extends Component
     #[Computed()]
     public function tiangs()
     {
-        return Tiang::orderBy('kode', 'asc')->get();
+        return Tiang::orderBy('kode', 'asc')->paginate($this->perPage);
     }
 
     public function deleteTiang(Tiang $tiang)

@@ -104,7 +104,7 @@
                                                 {{ $panel->idpel }}
                                             </td>
                                             <td>
-                                                {{ $panel->jaringan }} Jaringan
+                                                {{ $panel->jaringan }}
                                             </td>
                                             <td>
                                                 {{ $panel->saklar }}

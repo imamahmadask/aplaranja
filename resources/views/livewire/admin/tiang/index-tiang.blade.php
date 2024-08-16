@@ -70,7 +70,6 @@
                             <table id="tableTiang" class="table table-head-fixed table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
                                         <th>Kode Tiang</th>
                                         <th>Kategori</th>
                                         <th>Jenis</th>
@@ -85,14 +84,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $i = 1;
-                                    @endphp
                                     @foreach ($this->tiangs as $tiang)
                                         <tr wire:key="{{ $tiang->id }}">
-                                            <td>
-                                                {{ $i++ }}
-                                            </td>
                                             <td>
                                                 {{ $tiang->kode }}
                                             </td>
@@ -141,6 +134,9 @@
                                     <td colspan="12">Total <strong>{{ $this->tiangs->count() }}</strong></td>
                                 </tfoot>
                             </table>
+                            <div class="mx-4 my-2">
+                                {{ $this->tiangs->links() }}
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode', 15)->unique();
             $table->string('nama', 50);
-            $table->integer('panjang');
+            $table->float('panjang');
             $table->integer('lebar');
             $table->timestamps();
         });

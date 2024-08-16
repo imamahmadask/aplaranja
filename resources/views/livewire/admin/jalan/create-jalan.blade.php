@@ -46,12 +46,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="panjang">Panjang Jalan</label>
-                                    <input type="number" wire:model="panjang" class="form-control" id="panjang"
+                                    <input type="text" wire:model="panjang" class="form-control" id="panjang"
                                         placeholder="Masukkan Panjang Jalan">
                                 </div>
                                 <div class="form-group">
                                     <label for="lebar">Lebar Jalan</label>
-                                    <input type="number" wire:model="lebar" class="form-control" id="lebar"
+                                    <input type="text" wire:model="lebar" class="form-control" id="lebar"
                                         placeholder="Masukkan Lebar Jalan">
                                 </div>
 

@@ -68,6 +68,7 @@
                                         <option value="">Pilih Jaringan</option>
                                         <option value="1">1 Jaringan</option>
                                         <option value="2">2 Jaringan</option>
+                                        <option value="-">Unknown</option>
                                     </select>
                                 </div>
 

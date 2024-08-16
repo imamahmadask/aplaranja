@@ -24,19 +24,19 @@ class PanelImport implements ToModel, WithHeadingRow, WithUpserts
     public function model(array $row)
     {
         $jalan_id = Jalan::where('kode', $row['jalan'])->value('id');
-
+        $kode_jalan = Jalan::where('kode', $row['jalan'])->value('kode');
         $pecah = explode(", ", $row['kordinat']);
         $lat = $pecah[0];
         $long = $pecah[1];
 
         return new Panel([
-            'kode'      => $row['kode'],
+            'kode'      => $kode_jalan.'-'.$row['kode'],
             'kwh'       => $row['kwh'],
             'idpel'     => $row['idpel'],
             'jaringan'  => $row['jaringan'],
             'saklar'    => $row['saklar'],
-            'lat'       => $lat,
-            'long'      => $long,
+            'lat'       => $long,
+            'long'      => $lat,
             'jalan_id'  => $jalan_id,
         ]);
     }

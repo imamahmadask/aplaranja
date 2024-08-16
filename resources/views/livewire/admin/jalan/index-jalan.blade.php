@@ -110,7 +110,7 @@
                                                 {{ $jalan->nama }}
                                             </td>
                                             <td>
-                                                {{ $jalan->panjang }} meter
+                                                {{ $jalan->panjang }} Km
                                             </td>
                                             <td>{{ $jalan->lebar }} meter</td>
                                             <td>{{ $jalan->lat }}, {{ $jalan->long }}</td>

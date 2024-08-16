@@ -18,21 +18,22 @@ class TiangImport implements ToModel, WithHeadingRow, WithUpserts
     public function model(array $row)
     {
         $panel_id = Panel::where('kode', $row['panel'])->value('id');
+        $kode_panel = Panel::where('kode', $row['panel'])->value('kode');
 
         $pecah = explode(", ", $row['kordinat']);
         $lat = $pecah[0];
         $long = $pecah[1];
 
         return new Tiang([
-            'kode'              => $row['kode'],
+            'kode'              => $kode_panel.'-'.$row['kode'],
             'kategori'          => $row['kategori'],
             'jenis'             => $row['jenis'],
             'lengan'            => $row['lengan'],
             'tahun_pengadaan'   => $row['tahun_pengadaan'],
             'jaringan'          => $row['jaringan'],
             'posisi_tiang'      => $row['posisi_tiang'],
-            'lat'               => $lat,
-            'long'              => $long,
+            'lat'               => $long,
+            'long'              => $lat,
             'lampu'             => $row['lampu'],
             'panel_id'          => $panel_id,
         ]);
