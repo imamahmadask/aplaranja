@@ -17,7 +17,9 @@ class IndexTiang extends Component
 {
     use WithFileUploads;
     use WithPagination;
-    public $perPage = 50;
+
+    public $perPage = 25;
+    public $search = '';
 
     #[Validate('required|file|max:2000')]
     public $fileTiang;
@@ -30,7 +32,15 @@ class IndexTiang extends Component
     #[Computed()]
     public function tiangs()
     {
-        return Tiang::orderBy('kode', 'asc')->paginate($this->perPage);
+        return Tiang::where('kode', 'like', '%'.$this->search.'%')
+                    ->orWhereHas('panel', function($query) {
+                        $query->where('kode', 'like', '%'.$this->search.'%')
+                            ->orWhereHas('jalan', function($query) {
+                                $query->where('nama', 'like', '%'.$this->search.'%');
+                            });
+                    })
+                    ->orderBy('kode', 'asc')
+                    ->paginate($this->perPage);
     }
 
     public function deleteTiang(Tiang $tiang)

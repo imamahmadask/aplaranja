@@ -132,6 +132,9 @@
                                     <td colspan="6">Total <strong>{{ $this->jalans->count() }}</strong></td>
                                 </tfoot>
                             </table>
+                            <div class="mx-4 my-2">
+                                {{ $this->jalans->links() }}
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>

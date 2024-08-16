@@ -9,13 +9,16 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 #[Title('Jalan')]
 class IndexJalan extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
+    public $perPage = 25;
     public $search = '';
 
     #[Validate('required|file|max:2000')]
@@ -30,7 +33,7 @@ class IndexJalan extends Component
     public function jalans()
     {
         return Jalan::where('nama', 'like', '%'.$this->search.'%')
-                ->orderBy('kode', 'asc')->get();
+                ->orderBy('kode', 'asc')->paginate($this->perPage);
     }
 
     public function deleteJalan(Jalan $jalan)

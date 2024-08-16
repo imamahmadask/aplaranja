@@ -64,6 +64,19 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Panel</h3>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" wire:model.live="search" name="search"
+                                        class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
@@ -133,6 +146,9 @@
                                     <td colspan="10">Total <strong>{{ $this->panels->count() }}</strong></td>
                                 </tfoot>
                             </table>
+                            <div class="mx-4 my-2">
+                                {{ $this->panels->links() }}
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>

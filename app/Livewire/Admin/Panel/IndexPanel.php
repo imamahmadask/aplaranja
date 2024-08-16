@@ -9,12 +9,17 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 #[Title('Panel')]
 class IndexPanel extends Component
 {
     use WithFileUploads;
+    use WithPagination;
+
+    public $perPage = 25;
+    public $search = '';
 
     #[Validate('required|file|max:2000')]
     public $filePanel;
@@ -27,7 +32,12 @@ class IndexPanel extends Component
     #[Computed()]
     public function panels()
     {
-        return Panel::orderBy('kode', 'asc')->get();
+        return Panel::where('kode', 'like', '%'.$this->search.'%')
+                        ->orWhereHas('jalan', function($query) {
+                            $query->where('nama', 'like', '%'.$this->search.'%');
+                        })
+                        ->orderBy('kode', 'asc')
+                        ->paginate($this->perPage);
     }
 
     public function deletePanel(Panel $panel)
