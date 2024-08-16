@@ -250,9 +250,10 @@
             L.marker([data.lat, data.long]).addTo(map)
                 .bindPopup(
                     '<h3>' + data.nama + '</h3>' +
-                    '<p>Kode Jalan : ' + data.kode + '</p>' +
-                    '<p>Jumlah Panel: ' + data.panel_count + '</p>' +
-                    '<p>Jumlah Tiang: ' + data.tiang_count + '</p>'
+                    '<p>Kode Jalan : ' + data.kode + '<br>' +
+                    'Jml Panel: ' + data.panel_count + '<br>' +
+                    'Jml Tiang: ' + data.tiang_count + '<br>' +
+                    'Jml Lampu: ' + data.lampu_count + '</p>'
                 );
         });
     </script>

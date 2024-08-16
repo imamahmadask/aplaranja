@@ -31,13 +31,34 @@ class IndexDashboard extends Component
             'count_regu' => Regu::count(),
         ];
 
-        $jalans = Jalan::with('panel.tiang')
-            ->withCount('panel')
-            ->get();
+        // $jalans = Jalan::with('panel.tiang')
+        //     ->withCount('panel')
+        //     ->get();
+
+        // $jalans->each(function($jalan) {
+        //     $jalan->tiang_count = $jalan->panel->sum(function($panel) {
+        //         return $panel->tiang->count();
+        //     });
+        // });
+
+        $jalans = Jalan::with(['panel.tiang'])
+        ->withCount('panel')
+        ->get();
 
         $jalans->each(function($jalan) {
-            $jalan->tiang_count = $jalan->panel->sum(function($panel) {
-                return $panel->tiang->count();
+            // Inisialisasi variabel
+            $jalan->tiang_count = 0;
+            $jalan->lampu_count = 0;
+
+            // Iterasi melalui setiap panel di jalan
+            $jalan->panel->each(function($panel) use ($jalan) {
+                // Menghitung jumlah tiang di setiap panel
+                $jalan->tiang_count += $panel->tiang->count();
+
+                // Menghitung jumlah lampu berdasarkan jumlah lengan di setiap tiang
+                $panel->tiang->each(function($tiang) use ($jalan) {
+                    $jalan->lampu_count += $tiang->lengan;
+                });
             });
         });
 
