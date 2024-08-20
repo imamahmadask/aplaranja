@@ -35,6 +35,7 @@ class EditRiwayatTiang extends Component
         $this->perbaikan = $riwayat_tiang->perbaikan;
         $this->alat = $riwayat_tiang->alat;
         $this->bahan = $riwayat_tiang->bahan;
+        $this->keterangan = $riwayat_tiang->keterangan;
 
         $this->tiangs = Tiang::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();

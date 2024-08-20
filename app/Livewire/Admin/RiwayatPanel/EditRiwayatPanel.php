@@ -35,6 +35,7 @@ class EditRiwayatPanel extends Component
         $this->perbaikan = $riwayat_panel->perbaikan;
         $this->alat = $riwayat_panel->alat;
         $this->bahan = $riwayat_panel->bahan;
+        $this->keterangan = $riwayat_panel->keterangan;
 
         $this->panels = Panel::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();

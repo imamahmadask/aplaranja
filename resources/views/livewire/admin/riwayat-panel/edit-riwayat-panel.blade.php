@@ -118,6 +118,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
+                                <a type="button" href="/admin/riwayat_panel" class="btn btn-danger">Cancel</a>
                             </div>
                         </form>
                     </div>

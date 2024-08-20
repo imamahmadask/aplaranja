@@ -94,7 +94,7 @@
                                                 {{ $riwayatPanel->bahan }}
                                             </td>
                                             <td>
-                                                {{ $riwayatPanel->keterangan }}
+                                                {{ Str::limit($riwayatPanel->keterangan, 50) }}
                                             </td>
                                             <td>
                                                 {{ $riwayatPanel->regu->nama }}

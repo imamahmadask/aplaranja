@@ -88,13 +88,13 @@
                                                 {{ $riwayatTiang->perbaikan }}
                                             </td>
                                             <td>
-                                                {{ $riwayatPanel->alat }}
+                                                {{ $riwayatTiang->alat }}
                                             </td>
                                             <td>
-                                                {{ $riwayatPanel->bahan }}
+                                                {{ $riwayatTiang->bahan }}
                                             </td>
                                             <td>
-                                                {{ $riwayatTiang->keterangan }}
+                                                {{ Str::limit($riwayatTiang->keterangan, 50) }}
                                             </td>
                                             <td>
                                                 {{ $riwayatTiang->regu->nama }}
