@@ -13,7 +13,7 @@ class CreateJalan extends Component
     #[Validate('required')]
     public $kode, $nama, $panjang, $lebar;
 
-    public $kordinat, $lat, $long;
+    public $kordinat, $lat, $long, $is_survey;
 
     public function render()
     {
@@ -33,6 +33,7 @@ class CreateJalan extends Component
             'lebar' => $this->lebar,
             'lat' => $this->lat,
             'long' => $this->long,
+            'is_survey' => $this->is_survey,
         ]);
 
         $this->reset();

@@ -129,7 +129,7 @@
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 250px;">
-                                    <input type="text" wire:model.live="search_tiang" name="search_tiang"
+                                    <input type="text" wire:model.live="search_jalan" name="search_jalan"
                                         class="form-control float-right" placeholder="Search nama jalan">
 
                                     <div class="input-group-append">
@@ -153,6 +153,7 @@
                                         <th>2 Lengan</th>
                                         <th>> 2 Lengan</th>
                                         <th>Jml Lampu</th>
+                                        <th>is_survey</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,6 +167,19 @@
                                             <td>{{ $data->jml_2_lengan }}</td>
                                             <td>{{ $data->jml_lebih_lengan }}</td>
                                             <td>{{ $data->total_lampu }}</td>
+                                            <td>
+                                                @if ($data->is_survey == 1)
+                                                    <div class="badge badge-success text-sm">
+                                                        Sudah
+                                                        <i class="fas fa-check-circle"></i>
+                                                    </div>
+                                                @elseif ($data->is_survey == 0)
+                                                    <div class="badge badge-danger text-sm">
+                                                        Belum
+                                                        <i class="fas fa-times-circle"></i>
+                                                    </div>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -178,6 +192,7 @@
                                     <td><b>{{ $this->total_jalans->total_2_lengan }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_lebih_lengan }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_lampu }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_is_survey }}</b></td>
                                 </tfoot>
                             </table>
                             <div class="mx-4 my-2">

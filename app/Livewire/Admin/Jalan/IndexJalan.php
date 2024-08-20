@@ -33,7 +33,9 @@ class IndexJalan extends Component
     public function jalans()
     {
         return Jalan::where('nama', 'like', '%'.$this->search.'%')
-                ->orderBy('kode', 'asc')->paginate($this->perPage);
+                ->orWhere('kode', 'like', '%'.$this->search.'%')
+                ->orderBy('kode', 'asc')
+                ->paginate($this->perPage);
     }
 
     public function deleteJalan(Jalan $jalan)

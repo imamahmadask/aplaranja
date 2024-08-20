@@ -60,6 +60,13 @@
                                     <input type="text" wire:model="kordinat" class="form-control" id="kordinat"
                                         placeholder="Masukkan Kordinat Jalan">
                                 </div>
+                                <div class="form-group">
+                                    <label for="is_survey">Is Survey</label>
+                                    <select name="is_survey" wire:model="is_survey" class="form-control">
+                                        <option value="0">Belum Survey</option>
+                                        <option value="1">Sudah Survey</option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- /.card-body -->
 

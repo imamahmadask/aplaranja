@@ -91,6 +91,7 @@
                                         <th>Panjang Jalan</th>
                                         <th>Lebar Jalan</th>
                                         <th>Kordinat</th>
+                                        <th>is_survey</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -112,8 +113,25 @@
                                             <td>
                                                 {{ $jalan->panjang }} Km
                                             </td>
-                                            <td>{{ $jalan->lebar }} meter</td>
-                                            <td>{{ $jalan->lat }}, {{ $jalan->long }}</td>
+                                            <td>
+                                                {{ $jalan->lebar }} meter
+                                            </td>
+                                            <td>
+                                                {{ $jalan->lat }}, {{ $jalan->long }}
+                                            </td>
+                                            <td>
+                                                @if ($jalan->is_survey == 1)
+                                                    <div class="badge badge-success text-sm">
+                                                        Sudah
+                                                        <i class="fas fa-check-circle"></i>
+                                                    </div>
+                                                @elseif ($jalan->is_survey == 0)
+                                                    <div class="badge badge-danger text-sm">
+                                                        Belum
+                                                        <i class="fas fa-times-circle"></i>
+                                                    </div>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="jalan/{{ $jalan->id }}/edit"
                                                     class="btn btn-sm btn-primary mx-2">
@@ -129,7 +147,7 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <td colspan="6">Total <strong>{{ $this->jalans->count() }}</strong></td>
+                                    <td colspan="8">Total <strong>{{ $this->jalans->count() }}</strong></td>
                                 </tfoot>
                             </table>
                             <div class="mx-4 my-2">

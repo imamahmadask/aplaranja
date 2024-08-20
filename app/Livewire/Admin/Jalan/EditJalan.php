@@ -13,7 +13,7 @@ class EditJalan extends Component
     #[Validate('required')]
     public $jalanId, $kode, $nama, $panjang, $lebar;
 
-    public $kordinat, $lat, $long;
+    public $kordinat, $lat, $long, $is_survey;
 
     public function render()
     {
@@ -30,6 +30,7 @@ class EditJalan extends Component
         $this->panjang = $jalan->panjang;
         $this->lebar = $jalan->lebar;
         $this->kordinat = $jalan->lat.", ".$jalan->long;
+        $this->is_survey = $jalan->is_survey;
     }
 
     public function updateJalan()
@@ -47,6 +48,7 @@ class EditJalan extends Component
             'lebar' => $this->lebar,
             'lat' => $this->lat,
             'long' => $this->long,
+            'is_survey' => $this->is_survey,
         ]);
 
         $this->reset();

@@ -19,7 +19,7 @@ class IndexDashboard extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
-    public $search_tiang ='';
+    public $search_jalan ='';
     public $perPage = 5;
 
     public function render()
@@ -30,16 +30,6 @@ class IndexDashboard extends Component
             'count_tiang' => Tiang::count(),
             'count_regu' => Regu::count(),
         ];
-
-        // $jalans = Jalan::with('panel.tiang')
-        //     ->withCount('panel')
-        //     ->get();
-
-        // $jalans->each(function($jalan) {
-        //     $jalan->tiang_count = $jalan->panel->sum(function($panel) {
-        //         return $panel->tiang->count();
-        //     });
-        // });
 
         $jalans = Jalan::with(['panel.tiang'])
         ->withCount('panel')
@@ -75,6 +65,7 @@ class IndexDashboard extends Component
             ->select(DB::raw('
                 jalans.nama as jalan,
                 jalans.kode as kode_jalan,
+                jalans.is_survey as is_survey,
                 count(DISTINCT panels.id) as jml_panel,
                 count(tiangs.id) as jml_tiang,
                 SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as jml_1_lengan,
@@ -84,8 +75,9 @@ class IndexDashboard extends Component
             '))
             ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
             ->leftJoin('tiangs', 'panels.id', '=', 'tiangs.panel_id')
-            ->where('nama', 'like', '%'.$this->search_tiang.'%')
-            ->groupBy('jalans.nama', 'jalans.kode', 'jalans.lat', 'jalans.long')
+            ->where('jalans.nama', 'like', '%'.$this->search_jalan.'%')
+            ->orWhere('jalans.kode', 'like', '%'.$this->search_jalan.'%')
+            ->groupBy('jalans.nama', 'jalans.kode', 'jalans.lat', 'jalans.long', 'jalans.is_survey')
             ->paginate($this->perPage);
     }
 
@@ -93,19 +85,21 @@ class IndexDashboard extends Component
     public function total_jalans()
     {
         return DB::table('jalans')
-        ->select(DB::raw('
-            count(DISTINCT jalans.id) as total_jalan,
-            count(DISTINCT panels.id) as total_panel,
-            count(tiangs.id) as total_tiang,
-            SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as total_1_lengan,
-            SUM(CASE WHEN tiangs.lengan = 2 THEN 1 ELSE 0 END) as total_2_lengan,
-            SUM(CASE WHEN tiangs.lengan > 2 THEN 1 ELSE 0 END) as total_lebih_lengan,
-            SUM(tiangs.lengan) as total_lampu
-        '))
-        ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
-        ->leftJoin('tiangs', 'panels.id', '=', 'tiangs.panel_id')
-        ->where('jalans.nama', 'like', '%'.$this->search_tiang.'%')
-        ->first();
+                    ->select(DB::raw('
+                        COUNT(DISTINCT jalans.id) as total_jalan,
+                        COUNT(DISTINCT panels.id) as total_panel,
+                        COUNT(tiangs.id) as total_tiang,
+                        COUNT(DISTINCT CASE WHEN jalans.is_survey = 1 THEN jalans.id ELSE NULL END) as total_is_survey,
+                        SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as total_1_lengan,
+                        SUM(CASE WHEN tiangs.lengan = 2 THEN 1 ELSE 0 END) as total_2_lengan,
+                        SUM(CASE WHEN tiangs.lengan > 2 THEN 1 ELSE 0 END) as total_lebih_lengan,
+                        SUM(tiangs.lengan) as total_lampu
+                    '))
+                    ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
+                    ->leftJoin('tiangs', 'panels.id', '=', 'tiangs.panel_id')
+                    ->where('jalans.nama', 'like', '%'.$this->search_jalan.'%')
+                    ->orWhere('jalans.kode', 'like', '%'.$this->search_jalan.'%')
+                    ->first();
     }
 
 }
