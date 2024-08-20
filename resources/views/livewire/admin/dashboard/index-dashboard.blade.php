@@ -125,7 +125,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Rekap Tiang Per Jalan</h3>
+                            <h3 class="card-title">Data Rekap Per Jalan</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 250px;">
@@ -261,11 +261,36 @@
 
         const jalans = {!! json_encode($jalans) !!};
 
+        // Mendefinisikan ikon untuk jalan yang sudah disurvei dan yang belum
+        var surveyedIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        var notSurveyedIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
         jalans.forEach(data => {
-            L.marker([data.lat, data.long]).addTo(map)
+            // Memilih ikon berdasarkan status survey
+            var icon = data.is_survey == 1 ? surveyedIcon : notSurveyedIcon;
+
+            L.marker([data.lat, data.long], {
+                    icon: icon
+                }).addTo(map)
                 .bindPopup(
                     '<h3>' + data.nama + '</h3>' +
                     '<p>Kode Jalan : ' + data.kode + '<br>' +
+                    'Survey : ' + (data.is_survey == 1 ? 'Sudah' : 'Belum') + '<br>' +
                     'Jml Panel: ' + data.panel_count + '<br>' +
                     'Jml Tiang: ' + data.tiang_count + '<br>' +
                     'Jml Lampu: ' + data.lampu_count + '</p>'

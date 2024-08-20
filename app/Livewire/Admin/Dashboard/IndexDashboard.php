@@ -20,7 +20,7 @@ class IndexDashboard extends Component
     use WithPagination, WithoutUrlPagination;
 
     public $search_jalan ='';
-    public $perPage = 5;
+    public $perPage = 10;
 
     public function render()
     {
