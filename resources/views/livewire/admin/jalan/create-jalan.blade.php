@@ -68,6 +68,12 @@
                                         <option value="1">Sudah Survey</option>
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="ket">Keterangan</label>
+                                    <textarea name="ket" wire:model="ket" class="form-control" cols="30" rows="5"
+                                        placeholder="Masukkan Keterangan Jika Ada"></textarea>
+                                </div>
                             </div>
                             <!-- /.card-body -->
 

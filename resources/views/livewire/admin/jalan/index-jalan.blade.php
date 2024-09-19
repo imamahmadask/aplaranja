@@ -92,6 +92,7 @@
                                         <th>Lebar Jalan</th>
                                         <th>Kordinat</th>
                                         <th>is_survey</th>
+                                        <th>Ket.</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -131,6 +132,9 @@
                                                         <i class="fas fa-times-circle"></i>
                                                     </div>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                {{ $jalan->ket }}
                                             </td>
                                             <td>
                                                 <a href="jalan/{{ $jalan->id }}/edit"
