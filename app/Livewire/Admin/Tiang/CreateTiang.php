@@ -7,14 +7,20 @@ use App\Models\Tiang;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Title('Create Tiang')]
 class CreateTiang extends Component
 {
+    use WithFileUploads;
+
     #[Validate('required')]
     public $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu, $posisi_tiang;
 
-    public $panels, $lat, $long, $kode_panel;
+    // #[Validate('image|max:2000')]
+    public $foto;
+
+    public $panels, $lat, $long, $kode_panel, $kondisi;
 
     public function render()
     {
@@ -26,6 +32,10 @@ class CreateTiang extends Component
         $this->validate();
 
         $this->getKordinat($this->kordinat);
+
+        // Gambar Lokasi
+        $nama_foto = $this->kode.'.'.$this->foto->extension();
+        $file_foto = $this->foto->storeAs('gambar_tiang', $nama_foto, 'public');
 
         Tiang::create([
             'kode' => $this->kode_panel.'-'.$this->kode,
@@ -39,6 +49,8 @@ class CreateTiang extends Component
             'panel_id' => $this->panel_id,
             'lampu' => $this->lampu,
             'posisi_tiang' => $this->posisi_tiang,
+            'foto' => $file_foto,
+            'kondisi' => $this->kondisi,
         ]);
 
         $this->reset();

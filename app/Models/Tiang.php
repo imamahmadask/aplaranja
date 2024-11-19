@@ -15,7 +15,7 @@ class Tiang extends Model
 
     protected $fillable = [
         'kode', 'kategori', 'jenis', 'lengan', 'tahun_pengadaan', 'jaringan',
-        'lat', 'long', 'panel_id', 'lampu', 'posisi_tiang'
+        'lat', 'long', 'panel_id', 'lampu', 'posisi_tiang', 'foto', 'kondisi'
     ];
 
     public function panel(): BelongsTo

@@ -91,6 +91,7 @@
                                         <th>Jaringan</th>
                                         <th>Posisi</th>
                                         <th>Lampu</th>
+                                        <th>Kondisi</th>
                                         <th>Kordinat</th>
                                         <th>Riwayat</th>
                                         <th>Action</th>
@@ -122,6 +123,9 @@
                                             </td>
                                             <td>
                                                 {{ $tiang->lampu }}
+                                            </td>
+                                            <td>
+                                                {{ $tiang->kondisi }}
                                             </td>
                                             <td>
                                                 {{ $tiang->lat }}, {{ $tiang->long }}

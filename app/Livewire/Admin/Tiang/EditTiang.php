@@ -7,14 +7,22 @@ use App\Models\Tiang;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Title('Edit Tiang')]
 class EditTiang extends Component
 {
+    use WithFileUploads;
+
     #[Validate('required')]
     public $tiangId, $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu, $posisi_tiang;
 
-    public $panels, $lat, $long, $kode_panel;
+    public $panels, $lat, $long, $kode_panel, $kondisi;
+
+    // #[Validate('image|max:2000')]
+    public $foto;
+
+    public $foto_asli;
 
     public function render()
     {
@@ -37,6 +45,8 @@ class EditTiang extends Component
         $this->panel_id = $tiang->panel_id;
         $this->lampu = $tiang->lampu;
         $this->posisi_tiang = $tiang->posisi_tiang;
+        $this->kondisi = $tiang->kondisi;
+        $this->foto_asli = $tiang->foto;
 
         $this->panels = Panel::orderBy('kode', 'asc')->get();
     }
@@ -48,6 +58,14 @@ class EditTiang extends Component
         $tiang = Tiang::find($this->tiangId);
 
         $this->getKordinat($this->kordinat);
+
+        // setting Gambar Lokasi
+        if($this->foto == $tiang->foto || $this->foto == null){
+            $file_foto = $tiang->foto;
+        }else{
+            $nama_foto = $this->kode.'.'.$this->foto->extension();
+            $file_foto = $this->foto->storeAs('gambar_tiang', $nama_foto, 'public');
+        }
 
         $tiang->update([
             'kode' => $this->kode_panel.'-'.$this->kode,
@@ -61,6 +79,8 @@ class EditTiang extends Component
             'panel_id' => $this->panel_id,
             'lampu' => $this->lampu,
             'posisi_tiang' => $this->posisi_tiang,
+            'kondisi' => $this->kondisi,
+            'foto' => $file_foto,
         ]);
 
         $this->reset();

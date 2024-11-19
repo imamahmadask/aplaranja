@@ -121,6 +121,28 @@
                                         <option value="Son-T">Son-T</option>
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="kondisi">Kondisi Tiang</label>
+                                    <select name="kondisi" wire:model="kondisi" class="form-control">
+                                        <option value="">Pilih Kondisi</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Rusak Ringan">Rusak Ringan</option>
+                                        <option value="Rusak Sedang">Rusak Sedang</option>
+                                        <option value="Rusak Berat">Rusak Berat</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="foto">Foto Tiang</label>
+                                    <input type="file" wire:model="foto" class="form-control" id="foto">
+                                    @if ($foto)
+                                        <img src="{{ $foto->temporaryUrl() }}" width="200px" class="mt-2">
+                                    @endif
+                                    @error('foto')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <!-- /.card-body -->
 
