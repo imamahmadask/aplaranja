@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Jalan extends Model
 {
@@ -20,4 +21,9 @@ class Jalan extends Model
     {
         return $this->hasMany(Panel::class);
     }
+
+    public function tiang(): HasManyThrough
+{
+    return $this->hasManyThrough(Tiang::class, Panel::class);
+}
 }

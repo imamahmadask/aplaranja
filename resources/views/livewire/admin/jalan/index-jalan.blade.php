@@ -137,6 +137,10 @@
                                                 {{ $jalan->ket }}
                                             </td>
                                             <td>
+                                                <a href="jalan/{{ $jalan->id }}/detail"
+                                                    class="btn btn-sm btn-success mx-2">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
                                                 <a href="jalan/{{ $jalan->id }}/edit"
                                                     class="btn btn-sm btn-primary mx-2">
                                                     <i class="fas fa-edit"></i>

@@ -6,6 +6,7 @@ use App\Livewire\Admin\Info\CreateInfo;
 use App\Livewire\Admin\Info\EditInfo;
 use App\Livewire\Admin\Info\IndexInfo;
 use App\Livewire\Admin\Jalan\CreateJalan;
+use App\Livewire\Admin\Jalan\DetailJalan;
 use App\Livewire\Admin\Jalan\EditJalan;
 use App\Livewire\Admin\Jalan\IndexJalan;
 use App\Livewire\Admin\Lampu\IndexLampu;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/jalan', IndexJalan::class)->name('jalan.index'); // Jalan
     Route::get('admin/jalan/create', CreateJalan::class)->name('jalan.create'); // Create Jalan
     Route::get('admin/jalan/{id}/edit', EditJalan::class)->name('jalan.edit'); // Edit Jalan
+    Route::get('admin/jalan/{id}/detail', DetailJalan::class)->name('jalan.detail'); // Detail Jalan
 
     Route::get('admin/panel', IndexPanel::class)->name('panel.index'); // Panel
     Route::get('admin/panel/create', CreatePanel::class)->name('panel.create'); // Create panel
