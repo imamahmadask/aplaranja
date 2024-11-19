@@ -43,7 +43,7 @@
         <!-- Main Content -->
         <main class="flex-grow flex flex-col items-center justify-center text-center px-4">
             <h2 class="text-4xl font-bold text-blue-600 mb-4">Welcome to Aplaranja</h2>
-            <p class="text-gray-600 text-lg mb-6">Aplikasi Pendataan Perlengkapan Jalan</p>
+            <p class="text-gray-600 text-lg mb-6">Aplikasi Laporan Penerangan Jalan</p>
             @if (Route::has('login'))
                 @auth
                     <a href="{{ route('dashboard') }}"
