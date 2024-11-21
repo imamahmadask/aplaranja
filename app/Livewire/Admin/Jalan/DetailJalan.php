@@ -12,12 +12,27 @@ use Livewire\Component;
 class DetailJalan extends Component
 {
     public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey, $ket;
-    public $countPanels, $countTiangs = 0;
-    public $countTiang, $countOrnamen, $countGawang = 0;
-    public $countBesi, $countGalvanis, $countDekoratif = 0;
-    public $countLed, $countSont, $countBohlam, $countSolarCell = 0;
-    public $count1Lengan, $count2Lengan, $count2MoreLengan = 0;
-    public $countNormal, $countRusakRingan, $countRusakSedang, $countRusakBerat = 0;
+    public int $countPanels = 0;
+    public int $countTiangs = 0;
+    public int $countTiang = 0;
+    public int $countOrnamen = 0;
+    public int $countGawang = 0;
+    public int $countBesi = 0;
+    public int $countGalvanis = 0;
+    public int $countDekoratif = 0;
+    public int $countLed = 0;
+    public int $countSont = 0;
+    public int $countBohlam = 0;
+    public int $countSolarCell = 0;
+    public int $totalLampu = 0;
+    public int $count1Lengan = 0;
+    public int $count2Lengan = 0;
+    public int $count2MoreLengan = 0;
+    public int $totalLengan = 0;
+    public int $countNormal = 0;
+    public int $countRusakRingan = 0;
+    public int $countRusakSedang = 0;
+    public int $countRusakBerat = 0;
 
     public function render()
     {
@@ -70,7 +85,6 @@ class DetailJalan extends Component
 
     public function countKategoriLampu()
     {
-
         $panels = Panel::where('jalan_id', $this->jalanId)->get();
         foreach ($panels as $panel) {
             $this->countLed += $panel->tiang->where('lampu', 'LED')->count();
@@ -112,6 +126,9 @@ class DetailJalan extends Component
                 }
             }
         }
+        $this->totalLampu = $this->countLed + $this->countSont + $this->countBohlam + $this->countSolarCell;
+        $this->totalLengan = $this->totalLampu;
+
     }
 
     public function countKondisiTiang()
