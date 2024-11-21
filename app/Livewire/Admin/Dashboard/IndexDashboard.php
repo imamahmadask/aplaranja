@@ -63,6 +63,7 @@ class IndexDashboard extends Component
     {
         return DB::table('jalans')
             ->select(DB::raw('
+                jalans.id as id_jalan,
                 jalans.nama as jalan,
                 jalans.kode as kode_jalan,
                 jalans.is_survey as is_survey,
@@ -77,7 +78,8 @@ class IndexDashboard extends Component
             ->leftJoin('tiangs', 'panels.id', '=', 'tiangs.panel_id')
             ->where('jalans.nama', 'like', '%'.$this->search_jalan.'%')
             ->orWhere('jalans.kode', 'like', '%'.$this->search_jalan.'%')
-            ->groupBy('jalans.nama', 'jalans.kode', 'jalans.lat', 'jalans.long', 'jalans.is_survey')
+            ->orderBy('jalans.kode', 'asc')
+            ->groupBy('jalans.id', 'jalans.nama', 'jalans.kode', 'jalans.lat', 'jalans.long', 'jalans.is_survey')
             ->paginate($this->perPage);
     }
 

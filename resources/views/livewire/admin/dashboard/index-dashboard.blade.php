@@ -154,6 +154,7 @@
                                         <th>> 2 Lengan</th>
                                         <th>Jml Lampu</th>
                                         <th>is_survey</th>
+                                        <th>Show</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -179,6 +180,12 @@
                                                         <i class="fas fa-times-circle"></i>
                                                     </div>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('jalan.detail', ['id' => $data->id_jalan]) }}"
+                                                    class="btn btn-info btn-sm" target="_blank">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
