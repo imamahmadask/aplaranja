@@ -34,8 +34,14 @@ class CreateTiang extends Component
         $this->getKordinat($this->kordinat);
 
         // Gambar Lokasi
-        $nama_foto = $this->kode.'.'.$this->foto->extension();
-        $file_foto = $this->foto->storeAs('gambar_tiang', $nama_foto, 'public');
+        if($this->foto != null){
+            $nama_foto = $this->kode.'.'.$this->foto->extension();
+            $file_foto = $this->foto->storeAs('gambar_tiang', $nama_foto, 'public');
+        }
+        else
+        {
+            $file_foto = null;
+        }
 
         Tiang::create([
             'kode' => $this->kode_panel.'-'.$this->kode,

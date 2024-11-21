@@ -44,12 +44,18 @@
                                                 {{ $panel->jalan->nama }}</option>
                                         @endforeach
                                     </select>
+                                    @error('panel_id')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="kode">Kode</label>
                                     <input type="text" wire:model="kode" class="form-control" id="kode"
                                         placeholder="Masukkan Kode Tiang">
+                                    @error('kode')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -60,6 +66,9 @@
                                         <option value="Tiang">Tiang</option>
                                         <option value="Tiang Gawang">Tiang Gawang</option>
                                     </select>
+                                    @error('kategori')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -71,6 +80,9 @@
                                         <option value="Dekoratif">Dekoratif</option>
                                         <option value="-">Tidak ada</option>
                                     </select>
+                                    @error('jenis')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -82,12 +94,18 @@
                                         <option value="3">3 Lengan</option>
                                         <option value="8">8 Lengan</option>
                                     </select>
+                                    @error('lengan')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tahun_pengadaan">Tahun Pengadaan</label>
                                     <input type="number" wire:model="tahun_pengadaan" class="form-control"
                                         id="tahun_pengadaan" placeholder="Masukkan Tahun">
+                                    @error('tahun_pengadaan')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -97,21 +115,30 @@
                                         <option value="Atas">Atas</option>
                                         <option value="Bawah">Bawah</option>
                                     </select>
+                                    @error('jaringan')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="posisi_tiang">Posisi Tiang</label>
                                     <select name="posisi_tiang" wire:model="posisi_tiang" class="form-control">
                                         <option value="">Pilih Posisi Tiang</option>
-                                        <option value="Bahu Jalan">Bahu Jalan</option>
-                                        <option value="Median">Median</option>
+                                        <option value="Bahu jalan">Bahu Jalan</option>
+                                        <option value="Median jalan">Median</option>
                                     </select>
+                                    @error('posisi_tiang')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="kordinat">Kordinat</label>
                                     <input type="text" wire:model="kordinat" class="form-control" id="kordinat"
                                         placeholder="Masukkan Kordinat">
+                                    @error('kordinat')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -119,8 +146,11 @@
                                     <select name="lampu" wire:model="lampu" class="form-control">
                                         <option value="">Pilih Jenis Lampu</option>
                                         <option value="LED">LED</option>
-                                        <option value="Son-T">Son-T</option>
+                                        <option value="SON-T">SON-T</option>
                                     </select>
+                                    @error('lampu')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -132,6 +162,9 @@
                                         <option value="Rusak Sedang">Rusak Sedang</option>
                                         <option value="Rusak Berat">Rusak Berat</option>
                                     </select>
+                                    @error('kondisi')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
