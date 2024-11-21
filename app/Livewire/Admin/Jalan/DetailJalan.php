@@ -12,10 +12,12 @@ use Livewire\Component;
 class DetailJalan extends Component
 {
     public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey, $ket;
-    public $countPanels, $countTiangs;
-    public $countTiang, $countOrnamen, $countGawang;
-    public $countBesi, $countGalvanis;
-    public $countLed, $countSont, $countBohlam;
+    public $countPanels, $countTiangs = 0;
+    public $countTiang, $countOrnamen, $countGawang = 0;
+    public $countBesi, $countGalvanis, $countDekoratif = 0;
+    public $countLed, $countSont, $countBohlam, $countSolarCell = 0;
+    public $count1Lengan, $count2Lengan, $count2MoreLengan = 0;
+
     public function render()
     {
         return view('livewire.admin.jalan.detail-jalan');
@@ -40,7 +42,8 @@ class DetailJalan extends Component
         $this->countTiangs = $detail[0]->tiang_count;
         $this->countJenisTiang();
         $this->countKategoriTiang();
-        $this->countKategoriLampu();
+        $this->countLengan();
+        $this->countLampuByJenisAndLengan();
     }
 
     public function countKategoriTiang()
@@ -59,16 +62,53 @@ class DetailJalan extends Component
         foreach ($panels as $panel) {
             $this->countBesi += $panel->tiang->where('jenis', 'Besi')->count();
             $this->countGalvanis += $panel->tiang->where('jenis', 'Galvanis')->count();
+            $this->countDekoratif += $panel->tiang->where('jenis', 'Dekoratif')->count();
         }
     }
 
     public function countKategoriLampu()
     {
+
         $panels = Panel::where('jalan_id', $this->jalanId)->get();
         foreach ($panels as $panel) {
             $this->countLed += $panel->tiang->where('lampu', 'LED')->count();
             $this->countSont += $panel->tiang->where('lampu', 'SON-T')->count();
             $this->countBohlam += $panel->tiang->where('lampu', 'Bohlam')->count();
+        }
+
+    }
+
+    public function countLengan()
+    {
+        $panels = Panel::where('jalan_id', $this->jalanId)->get();
+        foreach ($panels as $panel) {
+            $this->count1Lengan += $panel->tiang->where('lengan', 1)->count();
+            $this->count2Lengan += $panel->tiang->where('lengan', 2)->count();
+            $this->count2MoreLengan += $panel->tiang->where('lengan', '>', 2)->count();
+        }
+    }
+
+    public function countLampuByJenisAndLengan()
+    {
+        // Ambil data tiang dengan relasi panel
+        $panels = Panel::where('jalan_id', $this->jalanId)->with('tiang')->get();
+
+        foreach ($panels as $panel) {
+            foreach ($panel->tiang as $tiang) {
+                $jenisLampu = $tiang->lampu;
+                $jumlahLengan = $tiang->lengan ?? 1; // Default lengan = 1 jika null
+
+                // Hitung jumlah lampu sesuai jenis
+                if ($jenisLampu === 'LED') {
+                    $this->countLed += $jumlahLengan;
+                } elseif ($jenisLampu === 'SON-T') {
+                    $this->countSont += $jumlahLengan;
+                } elseif ($jenisLampu === 'BOHLAM') {
+                    $this->countBohlam += $jumlahLengan;
+                } elseif ($jenisLampu === 'Solar Cell') {
+                    $this->countSolarCell += $jumlahLengan;
+                }
+            }
         }
     }
 

@@ -87,7 +87,6 @@
             <!-- /.row -->
 
             <div class="row">
-                <!-- left column -->
                 <div class="col-md-3">
                     <!-- general form elements -->
                     <div class="card card-secondary">
@@ -110,8 +109,34 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <!--/.col (left) -->
-                <!-- left column -->
+
+                <div class="col-md-3">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Jenis Tiang</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Besi</td>
+                                    <td>{{ $countBesi }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Galvanis</td>
+                                    <td>{{ $countGalvanis }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dekoratif</td>
+                                    <td>{{ $countDekoratif }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+
                 <div class="col-md-3">
                     <!-- general form elements -->
                     <div class="card card-secondary">
@@ -138,32 +163,34 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <!--/.col (left) -->
-                <!-- left column -->
+
                 <div class="col-md-3">
                     <!-- general form elements -->
                     <div class="card card-secondary">
                         <div class="card-header">
-                            <h3 class="card-title">Jenis Tiang</h3>
+                            <h3 class="card-title">Jumlah Lengan</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table class="table">
                                 <tr>
-                                    <td>Besi</td>
-                                    <td>{{ $countBesi }}</td>
+                                    <td>1 Lengan</td>
+                                    <td>{{ $count1Lengan }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Galvanis</td>
-                                    <td>{{ $countGalvanis }}</td>
+                                    <td>2 Lengan</td>
+                                    <td>{{ $count2Lengan }}</td>
+                                </tr>
+                                <tr>
+                                    <td>>2 Lengan</td>
+                                    <td>{{ $count2MoreLengan }}</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <!-- /.card -->
                 </div>
-                <!--/.col (left) -->
-                <!-- left column -->
+
                 <div class="col-md-3">
                     <!-- general form elements -->
                     <div class="card card-secondary">
@@ -182,6 +209,10 @@
                                     <td>{{ $countSont }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Solar Cell</td>
+                                    <td>{{ $countSolarCell }}</td>
+                                </tr>
+                                <tr>
                                     <td>Bohlam</td>
                                     <td>{{ $countBohlam }}</td>
                                 </tr>
@@ -190,7 +221,7 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <!--/.col (left) -->
+
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
