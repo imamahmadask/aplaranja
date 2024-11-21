@@ -222,6 +222,37 @@
                     <!-- /.card -->
                 </div>
 
+                <div class="col-md-3">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Kondisi Tiang</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Normal</td>
+                                    <td>{{ $countNormal }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rusak Ringan</td>
+                                    <td>{{ $countRusakRingan }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rusak Sedang</td>
+                                    <td>{{ $countRusakSedang }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rusak Berat</td>
+                                    <td>{{ $countRusakBerat }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->

@@ -17,6 +17,7 @@ class DetailJalan extends Component
     public $countBesi, $countGalvanis, $countDekoratif = 0;
     public $countLed, $countSont, $countBohlam, $countSolarCell = 0;
     public $count1Lengan, $count2Lengan, $count2MoreLengan = 0;
+    public $countNormal, $countRusakRingan, $countRusakSedang, $countRusakBerat = 0;
 
     public function render()
     {
@@ -44,6 +45,7 @@ class DetailJalan extends Component
         $this->countKategoriTiang();
         $this->countLengan();
         $this->countLampuByJenisAndLengan();
+        $this->countKondisiTiang();
     }
 
     public function countKategoriTiang()
@@ -109,6 +111,17 @@ class DetailJalan extends Component
                     $this->countSolarCell += $jumlahLengan;
                 }
             }
+        }
+    }
+
+    public function countKondisiTiang()
+    {
+        $panels = Panel::where('jalan_id', $this->jalanId)->get();
+        foreach ($panels as $panel) {
+            $this->countNormal += $panel->tiang->where('kondisi', 'Normal')->count();
+            $this->countRusakRingan += $panel->tiang->where('kondisi', 'Rusak Ringan')->count();
+            $this->countRusakSedang += $panel->tiang->where('kondisi', 'Rusak Sedang')->count();
+            $this->countRusakBerat += $panel->tiang->where('kondisi', 'Rusak Berat')->count();
         }
     }
 
