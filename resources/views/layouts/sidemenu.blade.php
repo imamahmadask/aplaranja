@@ -115,15 +115,6 @@
                         </p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('lampu.index') }}"
-                        class="nav-link {{ Request::routeIs('lampu.*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-lightbulb"></i>
-                        <p>
-                            Lampu
-                        </p>
-                    </a>
-                </li> --}}
                 <li
                     class="nav-item {{ Request::routeIs('riwayatPanel.*') || Request::routeIs('riwayatTiang*') ? 'menu-open' : '' }}">
                     <a href="#"
@@ -166,6 +157,15 @@
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Info Umum
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}"
+                        class="nav-link {{ Request::routeIs('users.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Users
                         </p>
                     </a>
                 </li>
