@@ -1,4 +1,5 @@
 <div>
+
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -23,7 +24,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- left column -->
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -83,6 +84,16 @@
                     <!-- /.card -->
                 </div>
                 <!--/.col (left) -->
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Map</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="mapDetail" style="width: 100%; height: 340px;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
 
@@ -258,5 +269,57 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-
 </div>
+@push('scripts')
+    <script>
+        // Inisialisasi peta dengan view default
+        var map = L.map('mapDetail').setView([-8.584587387437304, 116.10220505631855], 13);
+
+        // Menambahkan layer peta
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Data latitude dan longitude
+        const koordinat = {!! json_encode($kordinat) !!}; // Format: "-8.586782, 116.077263"
+
+        // Data tambahan
+        const namaJalan = {!! json_encode($nama) !!}; // Contoh: "Jalan Mawar"
+        const kodeJalan = {!! json_encode($kode) !!}; // Contoh: "JM001"
+        const isSurvey = {!! json_encode($is_survey) !!}; // Contoh: 1
+
+        // Memisahkan koordinat menjadi latitude dan longitude
+        const [lat, long] = koordinat.split(',').map(coord => parseFloat(coord.trim()));
+
+        // Menentukan ikon berdasarkan status survei
+        var icon = isSurvey == 1 ?
+            L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            }) :
+            L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+        // Menambahkan marker pada peta
+        L.marker([lat, long], {
+                icon: icon
+            })
+            .addTo(map)
+            .bindPopup(
+                '<h3>' + namaJalan + '</h3>' +
+                '<p>Kode Jalan : ' + kodeJalan + '<br>' +
+                'Survey : ' + (isSurvey == 1 ? 'Sudah' : 'Belum') + '</p>'
+            )
+            .openPopup(); // Membuka popup secara default
+    </script>
+@endpush
