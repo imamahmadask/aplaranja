@@ -21,13 +21,15 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-4">
-                    <a href="{{ route('info.create') }}" class="btn btn-app bg-primary">
-                        <i class="fas fa-plus"></i> Add Data
-                    </a>
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <a href="{{ route('info.create') }}" class="btn btn-app bg-primary">
+                            <i class="fas fa-plus"></i> Add Data
+                        </a>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <!-- /.row -->
             <div class="row">
@@ -58,7 +60,9 @@
                                         <th>Nama Item</th>
                                         <th>Deskripsi</th>
                                         <th>Gambar</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,17 +84,19 @@
                                                 <img src="/storage/{{ $info->gambar }}" alt=""
                                                     class="img-circle" width="50px" height="50px">
                                             </td>
-                                            <td>
-                                                <a href="info/{{ $info->id }}/edit"
-                                                    class="btn btn-sm btn-primary mx-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button wire:click="deleteInfo({{ $info->id }})"
-                                                    wire:confirm="Are you sure you want to delete this Info?"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
+                                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                                <td>
+                                                    <a href="info/{{ $info->id }}/edit"
+                                                        class="btn btn-sm btn-primary mx-2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button wire:click="deleteInfo({{ $info->id }})"
+                                                        wire:confirm="Are you sure you want to delete this Info?"
+                                                        class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

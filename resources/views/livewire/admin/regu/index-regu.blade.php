@@ -21,13 +21,15 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-4">
-                    <a href="{{ route('regu.create') }}" class="btn btn-app bg-primary">
-                        <i class="fas fa-plus"></i> Add Data
-                    </a>
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <a href="{{ route('regu.create') }}" class="btn btn-app bg-primary">
+                            <i class="fas fa-plus"></i> Add Data
+                        </a>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <!-- /.row -->
             <div class="row">
@@ -60,7 +62,9 @@
                                         <th class="text-center">Jumlah Anggota</th>
                                         <th>Riwayat Panel</th>
                                         <th>Riwayat Tiang</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,17 +91,19 @@
                                             <td>
                                                 {{ $regu->riwayatTiang->count() }}
                                             </td>
-                                            <td>
-                                                <a href="regu/{{ $regu->id }}/edit"
-                                                    class="btn btn-sm btn-primary mx-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button wire:click="deleteRegu({{ $regu->id }})"
-                                                    wire:confirm="Are you sure you want to delete this Regu?"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
+                                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                                <td>
+                                                    <a href="regu/{{ $regu->id }}/edit"
+                                                        class="btn btn-sm btn-primary mx-2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button wire:click="deleteRegu({{ $regu->id }})"
+                                                        wire:confirm="Are you sure you want to delete this Regu?"
+                                                        class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -20,44 +20,47 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-4 mb-3">
-                    <a href="{{ route('tiang.create') }}" class="btn btn-app bg-primary">
-                        <i class="fas fa-plus"></i> Add Data
-                    </a>
-                </div>
-            </div>
-
-            <div class="card card-primary">
-                <div class="row p-3">
-                    <div class="col">
-                        @if (session()->has('message'))
-                            <div class="alert alert-success text-center">{{ session('message') }}</div>
-                        @endif
-                        <form wire:submit.prevent="addTiang">
-                            <div class="form-group">
-                                <label for="fileTiang" class="font-weight-bold">Import Data Tiang</label>
-                                <input type="file" class="form-control" wire:model="fileTiang" />
-                            </div>
-
-                            @error('fileTiang')
-                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
-                            @enderror
-
-                            <div wire:loading wire:target="fileTiang" wire:key="fileTiang"><i
-                                    class="fa fa-spinner fa-spin mt-2 ml-2"></i> Uploading
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary w-20 mt-2">
-                                    <div wire:loading wire:target="addJalan" wire:key="addJalan"><i
-                                            class="fa fa-spinner fa-spin"></i></div> Import
-                                </button>
-                            </div>
-                        </form>
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                <div class="row">
+                    <div class="col-4 mb-3">
+                        <a href="{{ route('tiang.create') }}" class="btn btn-app bg-primary">
+                            <i class="fas fa-plus"></i> Add Data
+                        </a>
                     </div>
                 </div>
-            </div>
+
+
+                <div class="card card-primary">
+                    <div class="row p-3">
+                        <div class="col">
+                            @if (session()->has('message'))
+                                <div class="alert alert-success text-center">{{ session('message') }}</div>
+                            @endif
+                            <form wire:submit.prevent="addTiang">
+                                <div class="form-group">
+                                    <label for="fileTiang" class="font-weight-bold">Import Data Tiang</label>
+                                    <input type="file" class="form-control" wire:model="fileTiang" />
+                                </div>
+
+                                @error('fileTiang')
+                                    <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                @enderror
+
+                                <div wire:loading wire:target="fileTiang" wire:key="fileTiang"><i
+                                        class="fa fa-spinner fa-spin mt-2 ml-2"></i> Uploading
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary w-20 mt-2">
+                                        <div wire:loading wire:target="addJalan" wire:key="addJalan"><i
+                                                class="fa fa-spinner fa-spin"></i></div> Import
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <div class="row">
                 <div class="col-12">
@@ -94,7 +97,9 @@
                                         <th>Kondisi</th>
                                         <th>Kordinat</th>
                                         <th>Riwayat</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,17 +138,19 @@
                                             <td>
                                                 {{ $tiang->riwayat->count() }}
                                             </td>
-                                            <td>
-                                                <a href="{{ route('tiang.edit', ['id' => $tiang->id]) }}"
-                                                    class="btn btn-sm btn-primary mx-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button wire:click="deleteTiang({{ $tiang->id }})"
-                                                    wire:confirm="Are you sure you want to delete this Tiang?"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
+                                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                                <td>
+                                                    <a href="{{ route('tiang.edit', ['id' => $tiang->id]) }}"
+                                                        class="btn btn-sm btn-primary mx-2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button wire:click="deleteTiang({{ $tiang->id }})"
+                                                        wire:confirm="Are you sure you want to delete this Tiang?"
+                                                        class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

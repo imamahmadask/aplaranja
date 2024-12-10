@@ -21,45 +21,46 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-4">
-                    <a href="{{ route('jalan.create') }}" class="btn btn-app bg-primary">
-                        <i class="fas fa-plus"></i> Add Data
-                    </a>
-                </div>
-            </div>
-
-            <div class="card card-primary">
-                <div class="row p-3">
-                    <div class="col">
-                        @if (session()->has('message'))
-                            <div class="alert alert-success text-center">{{ session('message') }}</div>
-                        @endif
-                        <form wire:submit.prevent="addJalan">
-                            <div class="form-group">
-                                <label for="fileJalan" class="font-weight-bold">Import Data Jalan</label>
-                                <input type="file" class="form-control" wire:model="fileJalan" />
-                            </div>
-
-                            @error('fileJalan')
-                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
-                            @enderror
-
-                            <div wire:loading wire:target="fileJalan" wire:key="fileJalan"><i
-                                    class="fa fa-spinner fa-spin mt-2 ml-2"></i> Uploading
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary w-20 mt-2">
-                                    <div wire:loading wire:target="addJalan" wire:key="addJalan"><i
-                                            class="fa fa-spinner fa-spin"></i></div> Import
-                                </button>
-                            </div>
-                        </form>
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <a href="{{ route('jalan.create') }}" class="btn btn-app bg-primary">
+                            <i class="fas fa-plus"></i> Add Data
+                        </a>
                     </div>
                 </div>
-            </div>
 
+                <div class="card card-primary">
+                    <div class="row p-3">
+                        <div class="col">
+                            @if (session()->has('message'))
+                                <div class="alert alert-success text-center">{{ session('message') }}</div>
+                            @endif
+                            <form wire:submit.prevent="addJalan">
+                                <div class="form-group">
+                                    <label for="fileJalan" class="font-weight-bold">Import Data Jalan</label>
+                                    <input type="file" class="form-control" wire:model="fileJalan" />
+                                </div>
+
+                                @error('fileJalan')
+                                    <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                @enderror
+
+                                <div wire:loading wire:target="fileJalan" wire:key="fileJalan"><i
+                                        class="fa fa-spinner fa-spin mt-2 ml-2"></i> Uploading
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary w-20 mt-2">
+                                        <div wire:loading wire:target="addJalan" wire:key="addJalan"><i
+                                                class="fa fa-spinner fa-spin"></i></div> Import
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <!-- /.row -->
             <div class="row">
                 <div class="col-12">
@@ -141,15 +142,17 @@
                                                     class="btn btn-sm btn-success mx-2">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="jalan/{{ $jalan->id }}/edit"
-                                                    class="btn btn-sm btn-primary mx-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button wire:click="deleteJalan({{ $jalan->id }})"
-                                                    wire:confirm="Are you sure you want to delete this post?"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
+                                                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                                    <a href="jalan/{{ $jalan->id }}/edit"
+                                                        class="btn btn-sm btn-primary mx-2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button wire:click="deleteJalan({{ $jalan->id }})"
+                                                        wire:confirm="Are you sure you want to delete this post?"
+                                                        class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
