@@ -21,7 +21,7 @@ class IndexTiang extends Component
     public $perPage = 25;
     public $search = '';
 
-    #[Validate('required|file|max:2000')]
+    #[Validate('required|file|max:2000|mimes:xls,xlsx')]
     public $fileTiang;
 
     public function render()

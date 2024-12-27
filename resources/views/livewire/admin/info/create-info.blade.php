@@ -54,7 +54,9 @@
                                     <label for="gambar">Gambar</label>
                                     <input type="file" wire:model="gambar" class="form-control" id="gambar">
                                     @if ($gambar)
-                                        <img src="{{ $gambar->temporaryUrl() }}" width="200px" class="mt-2">
+                                        @if ($gambar->extension() == 'jpg' || $gambar->extension() == 'png' || $gambar->extension() == 'jpeg')
+                                            <img src="{{ $gambar->temporaryUrl() }}" width="200px" class="mt-2">
+                                        @endif
                                     @endif
                                     @error('gambar')
                                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>

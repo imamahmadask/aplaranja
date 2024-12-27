@@ -16,7 +16,7 @@ class CreateInfo extends Component
     #[Validate('required')]
     public $nama, $deskripsi;
 
-    #[Validate('image|max:2000')]
+    #[Validate('image|max:2000|mimes:jpg,jpeg,png')]
     public $gambar;
 
     public function render()
