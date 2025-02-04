@@ -11,9 +11,9 @@ use Livewire\Component;
 class EditJalan extends Component
 {
     #[Validate('required')]
-    public $jalanId, $kode, $nama, $panjang, $lebar;
+    public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey;
 
-    public $kordinat, $lat, $long, $is_survey, $ket;
+    public  $lat, $long, $ket;
 
     public function render()
     {
