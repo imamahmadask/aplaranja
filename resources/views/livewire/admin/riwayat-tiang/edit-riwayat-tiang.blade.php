@@ -36,6 +36,30 @@
                             <input type="hidden" name="" wire:model.live="riwayat_tiang_id">
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label for="jalan">Jalan</label>
+                                    <select name="jalan" wire:model.live="jalan" class="form-control">
+                                        <option value="">Pilih Jalan</option>
+                                        @foreach ($jalans as $jalan)
+                                            <option value={{ $jalan->id }}>{{ $jalan->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jalan')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="panel">Panel</label>
+                                    <select name="panel" wire:model.live="panel" class="form-control">
+                                        <option value="">Pilih Panel</option>
+                                        @foreach ($panels as $panel)
+                                            <option value={{ $panel->id }}>{{ $panel->kode }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('panel')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="tiang_id">Tiang</label>
                                     <select name="tiang_id" wire:model.live="tiang_id" class="form-control">
                                         <option value="">Pilih Tiang</option>
@@ -108,7 +132,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
-                                    <textarea wire:model="keterangan" class="form-control" name="keterangan" id="keterangan" cols="10" rows="5"></textarea>
+                                    <textarea wire:model="keterangan" class="form-control" name="keterangan" id="keterangan" cols="10"
+                                        rows="5"></textarea>
                                     @error('keterangan')
                                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                                     @enderror

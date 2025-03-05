@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\RiwayatTiang;
 
+use App\Models\Jalan;
+use App\Models\Panel;
 use App\Models\Regu;
 use App\Models\RiwayatTiang;
 use App\Models\Tiang;
@@ -15,7 +17,9 @@ class CreateRiwayatTiang extends Component
     #[Validate('required')]
     public $tanggal, $jenis, $kerusakan, $perbaikan, $tiang_id, $regu_id, $alat, $bahan;
 
-    public $tiangs, $regus, $keterangan;
+    public $jalan, $panel;
+
+    public $tiangs, $regus, $keterangan, $jalans, $panels;
 
     public function render()
     {
@@ -46,6 +50,21 @@ class CreateRiwayatTiang extends Component
     public function mount()
     {
         $this->tiangs = Tiang::orderBy('kode', 'asc')->get();
+
         $this->regus = Regu::orderBy('kode', 'asc')->get();
+
+        $this->jalans = Jalan::orderBy('kode', 'asc')->get();
+
+        $this->panels = Panel::orderBy('kode', 'asc')->get();
+    }
+
+    public function updatedJalan()
+    {
+        $this->panels = Panel::where('jalan_id', $this->jalan)->orderBy('kode', 'asc')->get();
+    }
+
+    public function updatedPanel()
+    {
+        $this->tiangs = Tiang::where('panel_id', $this->panel)->orderBy('kode', 'asc')->get();
     }
 }

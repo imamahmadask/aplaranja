@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\RiwayatTiang;
 
+use App\Models\Jalan;
+use App\Models\Panel;
 use App\Models\Regu;
 use App\Models\RiwayatTiang;
 use App\Models\Tiang;
@@ -15,7 +17,9 @@ class EditRiwayatTiang extends Component
     #[Validate('required')]
     public $riwayat_tiang_id, $tanggal, $jenis, $kerusakan, $perbaikan, $tiang_id, $regu_id, $alat, $bahan;
 
-    public $tiangs, $regus, $keterangan;
+    public $jalan, $panel, $tiang;
+
+    public $tiangs, $regus, $keterangan, $jalans, $panels;
 
     public function render()
     {
@@ -36,9 +40,14 @@ class EditRiwayatTiang extends Component
         $this->alat = $riwayat_tiang->alat;
         $this->bahan = $riwayat_tiang->bahan;
         $this->keterangan = $riwayat_tiang->keterangan;
+        $this->tiang = Tiang::find($riwayat_tiang->tiang_id);
+        $this->panel = $this->tiang->panel_id;
+        $this->jalan = $this->tiang->panel->jalan_id;
 
-        $this->tiangs = Tiang::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();
+        $this->tiangs = Tiang::where('panel_id', $this->panel)->orderBy('kode', 'asc')->get();
+        $this->panels = Panel::where('jalan_id', $this->jalan)->orderBy('kode', 'asc')->get();
+        $this->jalans = Jalan::orderBy('kode', 'asc')->get();
     }
 
     public function updateRiwayatTiang()
@@ -62,5 +71,15 @@ class EditRiwayatTiang extends Component
         $this->reset();
 
         $this->redirect('/admin/riwayat_tiang');
+    }
+
+    public function updatedJalan()
+    {
+        $this->panels = Panel::where('jalan_id', $this->jalan)->orderBy('kode', 'asc')->get();
+    }
+
+    public function updatedPanel()
+    {
+        $this->tiangs = Tiang::where('panel_id', $this->panel)->orderBy('kode', 'asc')->get();
     }
 }
