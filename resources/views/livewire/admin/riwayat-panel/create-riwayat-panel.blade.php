@@ -35,6 +35,18 @@
                         <form wire:submit="addRiwayatPanel">
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label for="jalan">Jalan</label>
+                                    <select name="jalan" wire:model.live="jalan" class="form-control">
+                                        <option value="">Pilih Jalan</option>
+                                        @foreach ($jalans as $jalan)
+                                            <option value={{ $jalan->id }}>{{ $jalan->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jalan')
+                                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="panel_id">Panel</label>
                                     <select name="panel_id" wire:model.live="panel_id" class="form-control">
                                         <option value="">Pilih Panel</option>
@@ -107,7 +119,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
-                                    <textarea wire:model="keterangan" class="form-control" name="keterangan" id="keterangan" cols="10" rows="5"></textarea>
+                                    <textarea wire:model="keterangan" class="form-control" name="keterangan" id="keterangan" cols="10"
+                                        rows="5"></textarea>
                                     @error('keterangan')
                                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                                     @enderror

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\RiwayatPanel;
 
+use App\Models\Jalan;
 use App\Models\Panel;
 use App\Models\Regu;
 use App\Models\RiwayatPanel;
@@ -14,8 +15,9 @@ class CreateRiwayatPanel extends Component
 {
     #[Validate('required')]
     public $tanggal, $jenis, $kerusakan, $perbaikan, $panel_id, $regu_id, $alat, $bahan;
-
-    public $panels, $regus, $keterangan;
+    public $jalan;
+    public $regus, $keterangan, $jalans;
+    public $panels = [];
 
     public function render()
     {
@@ -45,7 +47,13 @@ class CreateRiwayatPanel extends Component
 
     public function mount()
     {
-        $this->panels = Panel::orderBy('kode', 'asc')->get();
+        // $this->panels = Panel::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();
+        $this->jalans = Jalan::orderBy('kode', 'asc')->get();
+    }
+
+    public function updatedJalan()
+    {
+        $this->panels = Panel::where('jalan_id', $this->jalan)->orderBy('kode', 'asc')->get();
     }
 }

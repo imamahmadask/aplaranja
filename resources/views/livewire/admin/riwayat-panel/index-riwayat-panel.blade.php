@@ -120,7 +120,7 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <td colspan="8">Total <strong>{{ $this->riwayatPanels->count() }}</strong></td>
+                                    <td colspan="10">Total <strong>{{ $this->riwayatPanels->count() }}</strong></td>
                                 </tfoot>
                             </table>
                         </div>

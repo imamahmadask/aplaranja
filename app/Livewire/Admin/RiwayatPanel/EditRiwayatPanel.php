@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\RiwayatPanel;
 
+use App\Models\Jalan;
 use App\Models\Panel;
 use App\Models\Regu;
 use App\Models\RiwayatPanel;
@@ -14,8 +15,8 @@ class EditRiwayatPanel extends Component
 {
     #[Validate('required')]
     public $riwayat_panel_id, $tanggal, $jenis, $kerusakan, $perbaikan, $panel_id, $regu_id, $alat, $bahan;
-
-    public $panels, $regus, $keterangan;
+    public $jalan;
+    public $panels, $regus, $keterangan, $jalans;
 
     public function render()
     {
@@ -39,6 +40,10 @@ class EditRiwayatPanel extends Component
 
         $this->panels = Panel::orderBy('kode', 'asc')->get();
         $this->regus = Regu::orderBy('kode', 'asc')->get();
+
+        $panel = Panel::find($riwayat_panel->panel_id);
+        $this->jalan = $panel->jalan_id;
+        $this->jalans = Jalan::orderBy('kode', 'asc')->get();
     }
 
     public function updateRiwayatPanel()
@@ -62,5 +67,10 @@ class EditRiwayatPanel extends Component
         $this->reset();
 
         $this->redirect('/admin/riwayat_panel');
+    }
+
+    public function updatedJalan()
+    {
+        $this->panels = Panel::where('jalan_id', $this->jalan)->orderBy('kode', 'asc')->get();
     }
 }
