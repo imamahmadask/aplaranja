@@ -106,7 +106,9 @@
                                     @foreach ($this->tiangs as $tiang)
                                         <tr wire:key="{{ $tiang->id }}">
                                             <td>
-                                                {{ $tiang->kode }}
+                                                <a href="/detail/{{ $tiang->kode }}" target="_blank">
+                                                    {{ $tiang->kode }}
+                                                </a>
                                             </td>
                                             <td>
                                                 {{ $tiang->kategori }}
