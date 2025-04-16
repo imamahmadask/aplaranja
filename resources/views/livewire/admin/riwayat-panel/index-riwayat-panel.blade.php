@@ -21,7 +21,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User' || Auth::user()->role == 'Guest')
                 <div class="row mb-3">
                     <div class="col-4">
                         <a href="{{ route('riwayatPanel.create') }}" class="btn btn-app bg-primary">
@@ -95,10 +95,10 @@
                                                 {{ $riwayatPanel->alat }}
                                             </td>
                                             <td>
-                                                {{ $riwayatPanel->bahan }}
+                                                {{ Str::limit($riwayatPanel->bahan, 25) }}
                                             </td>
                                             <td>
-                                                {{ Str::limit($riwayatPanel->keterangan, 50) }}
+                                                {{ Str::limit($riwayatPanel->keterangan, 25) }}
                                             </td>
                                             <td>
                                                 {{ $riwayatPanel->regu->nama }}

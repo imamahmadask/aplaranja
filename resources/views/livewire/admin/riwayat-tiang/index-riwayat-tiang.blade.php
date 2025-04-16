@@ -21,7 +21,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User' || Auth::user()->role == 'Guest')
                 <div class="row mb-3">
                     <div class="col-4">
                         <a href="{{ route('riwayatTiang.create') }}" class="btn btn-app bg-primary">
@@ -95,10 +95,10 @@
                                                 {{ $riwayatTiang->alat }}
                                             </td>
                                             <td>
-                                                {{ $riwayatTiang->bahan }}
+                                                {{ Str::limit($riwayatTiang->bahan, 25) }}
                                             </td>
                                             <td>
-                                                {{ Str::limit($riwayatTiang->keterangan, 50) }}
+                                                {{ Str::limit($riwayatTiang->keterangan, 25) }}
                                             </td>
                                             <td>
                                                 {{ $riwayatTiang->regu->nama }}
