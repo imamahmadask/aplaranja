@@ -52,8 +52,12 @@ Route::middleware(['cekRole:Admin,User,Guest'])->group(function () {
     Route::get('admin/lampu', IndexLampu::class)->name('lampu.index'); // Lampu
 
     Route::get('admin/riwayat_panel', IndexRiwayatPanel::class)->name('riwayatPanel.index'); // Riwayat Panel
+    Route::get('admin/riwayat_panel/create', CreateRiwayatPanel::class)->name('riwayatPanel.create'); // Riwayat Panel
+    Route::get('admin/riwayat_panel/{id}/edit', EditRiwayatPanel::class)->name('riwayatPanel.edit'); // Riwayat Panel
 
     Route::get('admin/riwayat_tiang', IndexRiwayatTiang::class)->name('riwayatTiang.index'); // Riwayat Tiang
+    Route::get('admin/riwayat_tiang/create', CreateRiwayatTiang::class)->name('riwayatTiang.create'); // Riwayat Tiang
+    Route::get('admin/riwayat_tiang/{id}/edit', EditRiwayatTiang::class)->name('riwayatTiang.edit'); // Riwayat Tiang
 
     Route::get('admin/regu', IndexRegu::class)->name('regu.index'); // regu
 
@@ -73,12 +77,6 @@ Route::middleware(['cekRole:Admin,User'])->group(function () {
 
     Route::get('admin/tiang/create', CreateTiang::class)->name('tiang.create'); // Create Tiang
     Route::get('admin/tiang/{id}/edit', EditTiang::class)->name('tiang.edit'); // Edit Tiang
-
-    Route::get('admin/riwayat_panel/create', CreateRiwayatPanel::class)->name('riwayatPanel.create'); // Riwayat Panel
-    Route::get('admin/riwayat_panel/{id}/edit', EditRiwayatPanel::class)->name('riwayatPanel.edit'); // Riwayat Panel
-
-    Route::get('admin/riwayat_tiang/create', CreateRiwayatTiang::class)->name('riwayatTiang.create'); // Riwayat Tiang
-    Route::get('admin/riwayat_tiang/{id}/edit', EditRiwayatTiang::class)->name('riwayatTiang.edit'); // Riwayat Tiang
 
     Route::get('admin/regu/create', CreateRegu::class)->name('regu.create'); // regu
     Route::get('admin/regu/{id}/edit', EditRegu::class)->name('regu.edit'); // regu

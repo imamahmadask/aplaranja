@@ -65,7 +65,7 @@
                                         <th>Bahan</th>
                                         <th>Keterangan</th>
                                         <th>Regu</th>
-                                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User' || Auth::user()->role == 'Guest')
                                             <th>Action</th>
                                         @endif
                                     </tr>
@@ -103,7 +103,7 @@
                                             <td>
                                                 {{ $riwayatTiang->regu->nama }}
                                             </td>
-                                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
+                                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User' || Auth::user()->role == 'Guest')
                                                 <td>
                                                     <a href="riwayat_tiang/{{ $riwayatTiang->id }}/edit"
                                                         class="btn btn-sm btn-primary mx-2">
