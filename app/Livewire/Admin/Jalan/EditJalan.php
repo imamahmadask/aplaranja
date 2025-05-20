@@ -11,7 +11,7 @@ use Livewire\Component;
 class EditJalan extends Component
 {
     #[Validate('required')]
-    public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey;
+    public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey, $status;
 
     public  $lat, $long, $ket;
 
@@ -32,6 +32,7 @@ class EditJalan extends Component
         $this->kordinat = $jalan->lat.", ".$jalan->long;
         $this->is_survey = $jalan->is_survey;
         $this->ket = $jalan->ket;
+        $this->status = $jalan->status;
     }
 
     public function updateJalan()
@@ -50,7 +51,8 @@ class EditJalan extends Component
             'lat' => $this->lat,
             'long' => $this->long,
             'is_survey' => $this->is_survey,
-            'ket' => $this->ket
+            'ket' => $this->ket,
+            'status' => $this->status
         ]);
 
         $this->reset();

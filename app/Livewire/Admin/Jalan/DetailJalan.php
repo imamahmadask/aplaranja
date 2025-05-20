@@ -11,7 +11,7 @@ use Livewire\Component;
 #[Title('Detail Jalan')]
 class DetailJalan extends Component
 {
-    public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey, $ket;
+    public $jalanId, $kode, $nama, $panjang, $lebar, $kordinat, $is_survey, $ket, $status;
     public int $countPanels = 0;
     public int $countTiangs = 0;
     public int $countTiang = 0;
@@ -51,6 +51,7 @@ class DetailJalan extends Component
         $this->kordinat = $jalan->lat.", ".$jalan->long;
         $this->is_survey = $jalan->is_survey;
         $this->ket = $jalan->ket;
+        $this->status = $jalan->status;
 
         $detail = Jalan::where('id', $this->jalanId)->withCount(['panel', 'tiang'])->get();
 

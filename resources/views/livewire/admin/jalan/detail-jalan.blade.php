@@ -50,6 +50,10 @@
                                     <td>{{ $lebar }} meter</td>
                                 </tr>
                                 <tr>
+                                    <td>Status</td>
+                                    <td>Jalan {{ $status }}</td>
+                                </tr>
+                                <tr>
                                     <td>Kordinat</td>
                                     <td>
                                         {{ $kordinat }}

@@ -91,6 +91,7 @@
                                         <th>Ruas Jalan</th>
                                         <th>Panjang Jalan</th>
                                         <th>Lebar Jalan</th>
+                                        <th>Status</th>
                                         <th>Kordinat</th>
                                         <th>is_survey</th>
                                         <th>Ket.</th>
@@ -117,6 +118,9 @@
                                             </td>
                                             <td>
                                                 {{ $jalan->lebar }} meter
+                                            </td>
+                                            <td>
+                                                {{ $jalan->status }}
                                             </td>
                                             <td>
                                                 {{ $jalan->lat }}, {{ $jalan->long }}

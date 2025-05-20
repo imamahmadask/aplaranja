@@ -11,7 +11,7 @@ use Livewire\Component;
 class CreateJalan extends Component
 {
     #[Validate('required')]
-    public $kode, $nama, $panjang, $lebar, $kordinat, $is_survey;
+    public $kode, $nama, $panjang, $lebar, $kordinat, $is_survey, $status;
 
     public $lat, $long, $ket;
 
@@ -35,6 +35,7 @@ class CreateJalan extends Component
             'long' => $this->long,
             'is_survey' => $this->is_survey,
             'ket' => $this->ket,
+            'status' => $this->status
         ]);
 
         $this->reset();

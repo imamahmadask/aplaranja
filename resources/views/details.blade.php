@@ -27,6 +27,14 @@
                                 <h3>: {{ $tiang->panel->jalan->nama }}</h3>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <h3>Status Jalan</h3>
+                            </td>
+                            <td>
+                                <h3>: {{ $tiang->panel->jalan->status }}</h3>
+                            </td>
+                        </tr>
                     </table>
                     <hr>
                     <table class="table table-striped">

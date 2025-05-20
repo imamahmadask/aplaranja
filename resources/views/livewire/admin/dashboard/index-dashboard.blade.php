@@ -147,6 +147,7 @@
                                     <tr>
                                         <th>Kode Jalan</th>
                                         <th>Ruas Jalan</th>
+                                        <th>Status Jalan</th>
                                         <th>Jml Panel</th>
                                         <th>Jml Tiang</th>
                                         <th>1 Lengan</th>
@@ -162,6 +163,7 @@
                                         <tr>
                                             <td>{{ $data->kode_jalan }}</td>
                                             <td>{{ $data->jalan }}</td>
+                                            <td>{{ $data->status }}</td>
                                             <td>{{ $data->jml_panel }}</td>
                                             <td>{{ $data->jml_tiang }}</td>
                                             <td>{{ $data->jml_1_lengan }}</td>
@@ -193,6 +195,7 @@
                                 <tfoot>
                                     <td><b>Total</b></td>
                                     <td><b>{{ $this->total_jalans->total_jalan }}</b></td>
+                                    <td></td>
                                     <td><b>{{ $this->total_jalans->total_panel }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_tiang }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_1_lengan }}</b></td>
@@ -297,6 +300,7 @@
                 .bindPopup(
                     '<h3>' + data.nama + '</h3>' +
                     '<p>Kode Jalan : ' + data.kode + '<br>' +
+                    'Status : Jalan ' + data.status + '<br>' +
                     'Survey : ' + (data.is_survey == 1 ? 'Sudah' : 'Belum') + '<br>' +
                     'Jml Panel: ' + data.panel_count + '<br>' +
                     'Jml Tiang: ' + data.tiang_count + '<br>' +

@@ -67,6 +67,7 @@ class IndexDashboard extends Component
                 jalans.nama as jalan,
                 jalans.kode as kode_jalan,
                 jalans.is_survey as is_survey,
+                jalans.status as status,
                 count(DISTINCT panels.id) as jml_panel,
                 count(tiangs.id) as jml_tiang,
                 SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as jml_1_lengan,

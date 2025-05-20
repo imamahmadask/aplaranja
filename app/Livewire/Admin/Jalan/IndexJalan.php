@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Jalan;
 
 use App\Imports\JalanImport;
+use App\Imports\JalanUpdate;
 use App\Models\Jalan;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
@@ -51,8 +52,10 @@ class IndexJalan extends Component
     {
         $this->validate();
 
-        Excel::import(new JalanImport(), $this->fileJalan);
+        // Excel::import(new JalanImport(), $this->fileJalan);
+        Excel::import(new JalanUpdate(), $this->fileJalan);
 
         return redirect('/admin/jalan')->with('success', 'All good!');
     }
+
 }

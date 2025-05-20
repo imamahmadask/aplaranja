@@ -67,6 +67,19 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="status">Status Jalan</label>
+                                    <select name="status" wire:model="status" class="form-control">
+                                        <option value="">-- Pilih Status Jalan --</option>
+                                        <option value="Nasional">Nasional</option>
+                                        <option value="Provinsi">Provinsi</option>
+                                        <option value="Kota">Kota</option>
+                                        <option value="Lingkungan">Lingkungan</option>
+                                    </select>
+                                    @error('status')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="kordinat">Kordinat</label>
                                     <input type="text" wire:model="kordinat" class="form-control" id="kordinat"
                                         placeholder="Masukkan Kordinat Jalan">

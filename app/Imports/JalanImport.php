@@ -33,6 +33,7 @@ class JalanImport implements ToModel, WithHeadingRow, WithUpserts
             'lebar' => $row['lebar'],
             'lat' => $long,
             'long' => $lat,
+            'status' => $row['status'],
         ]);
     }
 }
