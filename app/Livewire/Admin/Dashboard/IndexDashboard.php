@@ -52,6 +52,16 @@ class IndexDashboard extends Component
             });
         });
 
+        // Count roads by status
+        $jalan_status = [
+            'nasional' => $jalans->where('status', 'Nasional')->count(),
+            'provinsi' => $jalans->where('status', 'Provinsi')->count(),
+            'kota' => $jalans->where('status', 'Kota')->count(),
+            'lingkungan' => $jalans->where('status', 'Lingkungan')->count(),
+        ];
+
+        // Add status counts to stats array
+        $stat = array_merge($stat, $jalan_status);
         return view('livewire.admin.dashboard.index-dashboard', [
             'stat' => $stat,
             'jalans' => $jalans

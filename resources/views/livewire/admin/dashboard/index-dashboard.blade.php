@@ -92,6 +92,69 @@
                 </div>
                 <!-- ./col -->
             </div>
+
+            <button class="btn btn-sm btn-secondary mb-3" id="toggle-stats">
+                <i class="fas fa-eye"></i> Tampilkan Status Jalan
+            </button>
+
+            <div class="row" id="stats-section" style="display: none;">
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $stat['nasional'] }}</h3>
+
+                            <p>Jalan Nasional</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $stat['provinsi'] }}</h3>
+
+                            <p>Jalan Provinsi</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $stat['kota'] }}</h3>
+
+                            <p>Jalan Kota</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $stat['lingkungan'] }}</h3>
+
+                            <p>Jalan Lingkungan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
             <!-- /.row -->
 
             {{-- <div class="row">
@@ -306,6 +369,21 @@
                     'Jml Tiang: ' + data.tiang_count + '<br>' +
                     'Jml Lampu: ' + data.lampu_count + '</p>'
                 );
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            let visible = false;
+
+            $('#toggle-stats').click(function() {
+                $('#stats-section').slideToggle();
+                visible = !visible;
+                $(this).html(visible ?
+                    '<i class="fas fa-eye-slash"></i> Sembunyikan Status Jalan' :
+                    '<i class="fas fa-eye"></i> Tampilkan Status Jalan'
+                );
+            });
         });
     </script>
 @endpush
