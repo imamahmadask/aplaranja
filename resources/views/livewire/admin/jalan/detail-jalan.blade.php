@@ -276,54 +276,42 @@
 </div>
 @push('scripts')
     <script>
-        // Inisialisasi peta dengan view default
-        var map = L.map('mapDetail').setView([-8.584587387437304, 116.10220505631855], 13);
+        var kordinat = {!! json_encode($kordinat) !!};
+        // Pecah string jadi 2 bagian: lat dan long
+        const [latStr, longStr] = kordinat.split(',');
+        const lat = parseFloat(latStr.trim());
+        const long = parseFloat(longStr.trim());
+        var map = L.map('mapDetail').setView([lat, long], 15);
 
-        // Menambahkan layer peta
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Data latitude dan longitude
-        const koordinat = {!! json_encode($kordinat) !!}; // Format: "-8.586782, 116.077263"
+        // Ambil data dari PHP
+        const koordinats = {!! json_encode($kordinat_tiang) !!};
 
-        // Data tambahan
-        const namaJalan = {!! json_encode($nama) !!}; // Contoh: "Jalan Mawar"
-        const kodeJalan = {!! json_encode($kode) !!}; // Contoh: "JM001"
-        const isSurvey = {!! json_encode($is_survey) !!}; // Contoh: 1
+        koordinats.forEach((data, index) => {
+            const lat = parseFloat(data.lat);
+            const long = parseFloat(data.long);
 
-        // Memisahkan koordinat menjadi latitude dan longitude
-        const [lat, long] = koordinat.split(',').map(coord => parseFloat(coord.trim()));
+            // Validasi lat long
+            if (!isNaN(lat) && !isNaN(long) && lat !== 0 && long !== 0) {
+                const popupContent = `
+                    <strong>Kode:</strong> ${data.kode}<br>
+                    <strong>Jenis:</strong> ${data.jenis}<br>
+                    <strong>Kategori:</strong> ${data.kategori}<br>
+                    <strong>Posisi:</strong> ${data.posisi}<br>
+                    <strong>Lengan:</strong> ${data.lengan}<br>
+                    <strong>Lampu:</strong> ${data.lampu}<br>
+                    <strong>Koordinat:</strong> ${lat}, ${long}<br>
+                    <a href="/detail/${data.kode}" target="_blank">Lihat Detail</a>
+                `;
 
-        // Menentukan ikon berdasarkan status survei
-        var icon = isSurvey == 1 ?
-            L.icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            }) :
-            L.icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            });
-
-        // Menambahkan marker pada peta
-        L.marker([lat, long], {
-                icon: icon
-            })
-            .addTo(map)
-            .bindPopup(
-                '<h3>' + namaJalan + '</h3>' +
-                '<p>Kode Jalan : ' + kodeJalan + '<br>' +
-                'Survey : ' + (isSurvey == 1 ? 'Sudah' : 'Belum') + '</p>'
-            )
-            .openPopup(); // Membuka popup secara default
+                L.marker([lat, long]).addTo(map)
+                    .bindPopup(popupContent);
+            } else {
+                console.warn(`Data koordinat tidak valid di index ${index}`, data);
+            }
+        });
     </script>
 @endpush

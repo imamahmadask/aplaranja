@@ -33,6 +33,7 @@ class DetailJalan extends Component
     public int $countRusakRingan = 0;
     public int $countRusakSedang = 0;
     public int $countRusakBerat = 0;
+    public $kordinat_tiang = [];
 
     public function render()
     {
@@ -54,6 +55,20 @@ class DetailJalan extends Component
         $this->status = $jalan->status;
 
         $detail = Jalan::where('id', $this->jalanId)->withCount(['panel', 'tiang'])->get();
+
+        $tiang = $jalan->tiang()->get();
+        foreach ($tiang as $t) {
+            $this->kordinat_tiang[] = [
+                'lat' => $t->lat,
+                'long' => $t->long,
+                'jenis' => $t->jenis,
+                'posisi' => $t->posisi_tiang,
+                'kode' => $t->kode,
+                'lengan' => $t->lengan,
+                'lampu' => $t->lampu,
+                'kategori' => $t->kategori
+            ];
+        }
 
         $this->countPanels = $detail[0]->panel_count;
         $this->countTiangs = $detail[0]->tiang_count;
