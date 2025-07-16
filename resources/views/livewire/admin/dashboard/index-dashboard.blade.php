@@ -22,6 +22,7 @@
         <div class="container-fluid">
             <!-- Info boxes -->
 
+            {{-- Row stats --}}
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small card -->
@@ -92,12 +93,15 @@
                 </div>
                 <!-- ./col -->
             </div>
+            <!-- /.row status jalan-->
 
+            {{-- Row stats --}}
             <button class="btn btn-sm btn-secondary mb-3" id="toggle-stats">
-                <i class="fas fa-eye"></i> Tampilkan Status Jalan
+                <i class="fas fa-eye"></i> Show Stats
             </button>
 
             <div class="row" id="stats-section" style="display: none;">
+                {{-- Status jalan --}}
                 <div class="col-lg-3 col-6">
                     <!-- small card -->
                     <div class="small-box bg-info">
@@ -154,35 +158,181 @@
                     </div>
                 </div>
                 <!-- ./col -->
-            </div>
-            <!-- /.row -->
 
-            {{-- <div class="row">
-                <div class="col bg-light mx-2 mb-2 p-2 rounded shadow-sm">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label>Filter By Jalan</label>
-                                <select class="form-control">
-                                    <option value="Jl. Brawijaya">Jl. Brawijaya</option>
-                                    <option value="Jl. Sriwijaya">Jl. Sriwijaya</option>
-                                    <option value="Jl. Majapahit">Jl. Majapahit</option>
-                                </select>
-                            </div>
+                {{-- Tiang --}}
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $stat['count_tiang'] }}</h3>
+
+                            <p>Total Tiang</p>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label>Tiang/Panel</label>
-                                <select class="form-control">
-                                    <option value="All">All</option>
-                                    <option value="Tiang">Tiang</option>
-                                    <option value="Panel">Panel</option>
-                                </select>
-                            </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $stat['tunggal'] }}</h3>
+
+                            <p>Tiang Tunggal</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $stat['ornamen'] }}</h3>
+
+                            <p>Tiang Ornamen</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $stat['gawang'] }}</h3>
+
+                            <p>Tiang Gawang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                {{-- Tiang --}}
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $this->total_jalans->total_1_lengan }}</h3>
+
+                            <p>Tiang 1 Lengan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $this->total_jalans->total_2_lengan }}</h3>
+
+                            <p>Tiang 2 Lengan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $this->total_jalans->total_3_lengan }}</h3>
+
+                            <p>Tiang 3 Lengan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $this->total_jalans->total_lebih_lengan }}</h3>
+
+                            <p>Tiang > 2 Lengan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                {{-- Lampu --}}
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $stat['led'] }}</h3>
+
+                            <p>LED</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $stat['sont'] }}</h3>
+
+                            <p>SON-T</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $stat['bohlam'] }}</h3>
+
+                            <p>BOHLAM</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $stat['solar'] }}</h3>
+
+                            <p>Solar Cell</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row stats -->
 
             <div class="row">
                 <div class="col-12">
@@ -215,6 +365,7 @@
                                         <th>Jml Tiang</th>
                                         <th>1 Lengan</th>
                                         <th>2 Lengan</th>
+                                        <th>3 Lengan</th>
                                         <th>> 2 Lengan</th>
                                         <th>Jml Lampu</th>
                                         <th>is_survey</th>
@@ -231,6 +382,7 @@
                                             <td>{{ $data->jml_tiang }}</td>
                                             <td>{{ $data->jml_1_lengan }}</td>
                                             <td>{{ $data->jml_2_lengan }}</td>
+                                            <td>{{ $data->jml_3_lengan }}</td>
                                             <td>{{ $data->jml_lebih_lengan }}</td>
                                             <td>{{ $data->total_lampu }}</td>
                                             <td>
@@ -263,6 +415,7 @@
                                     <td><b>{{ $this->total_jalans->total_tiang }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_1_lengan }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_2_lengan }}</b></td>
+                                    <td><b>{{ $this->total_jalans->total_3_lengan }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_lebih_lengan }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_lampu }}</b></td>
                                     <td><b>{{ $this->total_jalans->total_is_survey }}</b></td>
@@ -366,7 +519,7 @@
                     'Status : Jalan ' + data.status + '<br>' +
                     'Survey : ' + (data.is_survey == 1 ? 'Sudah' : 'Belum') + '<br>' +
                     'Jml Panel: ' + data.panel_count + '<br>' +
-                    'Jml Tiang: ' + data.tiang_count + '<br>' +
+                    'Jml Tiang: ' + data.jml_tiang + '<br>' +
                     'Jml Lampu: ' + data.lampu_count + '</p>'
                 );
         });
@@ -380,8 +533,8 @@
                 $('#stats-section').slideToggle();
                 visible = !visible;
                 $(this).html(visible ?
-                    '<i class="fas fa-eye-slash"></i> Sembunyikan Status Jalan' :
-                    '<i class="fas fa-eye"></i> Tampilkan Status Jalan'
+                    '<i class="fas fa-eye-slash"></i> Hide Stats' :
+                    '<i class="fas fa-eye"></i> Show Stats'
                 );
             });
         });

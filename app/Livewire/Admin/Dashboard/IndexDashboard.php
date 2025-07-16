@@ -36,19 +36,11 @@ class IndexDashboard extends Component
         ->get();
 
         $jalans->each(function($jalan) {
-            // Inisialisasi variabel
-            $jalan->tiang_count = 0;
-            $jalan->lampu_count = 0;
-
-            // Iterasi melalui setiap panel di jalan
-            $jalan->panel->each(function($panel) use ($jalan) {
-                // Menghitung jumlah tiang di setiap panel
-                $jalan->tiang_count += $panel->tiang->count();
-
-                // Menghitung jumlah lampu berdasarkan jumlah lengan di setiap tiang
-                $panel->tiang->each(function($tiang) use ($jalan) {
-                    $jalan->lampu_count += $tiang->lengan;
-                });
+            $jalan->jml_tiang = $jalan->panel->sum(function($panel) {
+                return $panel->tiang->count();
+            });
+            $jalan->lampu_count = $jalan->panel->sum(function($panel) {
+                return $panel->tiang->sum('lengan');
             });
         });
 
@@ -60,8 +52,52 @@ class IndexDashboard extends Component
             'lingkungan' => $jalans->where('status', 'Lingkungan')->count(),
         ];
 
+        // Count poles by category
+        $tiang_kategori = [
+            'tunggal' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('kategori', 'Tiang')->count();
+                });
+            }),
+            'ornamen' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('kategori', 'Ornamen')->count();
+                });
+            }),
+            'gawang' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('kategori', 'Gawang')->count();
+                });
+            }),
+        ];
+
+        // Count lamps by type
+        $lampu_jenis = [
+            'led' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('lampu', 'LED')->count();
+                });
+            }),
+            'sont' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('lampu', 'SON-T')->count();
+                });
+            }),
+            'bohlam' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('lampu', 'BOHLAM')->count();
+                });
+            }),
+            'solar' => $jalans->sum(function($jalan) {
+                return $jalan->panel->sum(function($panel) {
+                    return $panel->tiang->where('lampu', 'Solar Cell')->count();
+                });
+            }),
+        ];
+
         // Add status counts to stats array
-        $stat = array_merge($stat, $jalan_status);
+        $stat = array_merge($stat, $jalan_status, $tiang_kategori, $lampu_jenis);
+
         return view('livewire.admin.dashboard.index-dashboard', [
             'stat' => $stat,
             'jalans' => $jalans
@@ -82,7 +118,8 @@ class IndexDashboard extends Component
                 count(tiangs.id) as jml_tiang,
                 SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as jml_1_lengan,
                 SUM(CASE WHEN tiangs.lengan = 2 THEN 1 ELSE 0 END) as jml_2_lengan,
-                SUM(CASE WHEN tiangs.lengan > 2 THEN 1 ELSE 0 END) as jml_lebih_lengan,
+                SUM(CASE WHEN tiangs.lengan = 3 THEN 1 ELSE 0 END) as jml_3_lengan,
+                SUM(CASE WHEN tiangs.lengan > 3 THEN 1 ELSE 0 END) as jml_lebih_lengan,
                 SUM(tiangs.lengan) as total_lampu
             '))
             ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
@@ -105,7 +142,8 @@ class IndexDashboard extends Component
                         COUNT(DISTINCT CASE WHEN jalans.is_survey = 1 THEN jalans.id ELSE NULL END) as total_is_survey,
                         SUM(CASE WHEN tiangs.lengan = 1 THEN 1 ELSE 0 END) as total_1_lengan,
                         SUM(CASE WHEN tiangs.lengan = 2 THEN 1 ELSE 0 END) as total_2_lengan,
-                        SUM(CASE WHEN tiangs.lengan > 2 THEN 1 ELSE 0 END) as total_lebih_lengan,
+                        SUM(CASE WHEN tiangs.lengan = 3 THEN 1 ELSE 0 END) as total_3_lengan,
+                        SUM(CASE WHEN tiangs.lengan > 3 THEN 1 ELSE 0 END) as total_lebih_lengan,
                         SUM(tiangs.lengan) as total_lampu
                     '))
                     ->leftJoin('panels', 'jalans.id', '=', 'panels.jalan_id')
