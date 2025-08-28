@@ -106,7 +106,7 @@
                                     @foreach ($this->tiangs as $tiang)
                                         <tr wire:key="{{ $tiang->id }}">
                                             <td>
-                                                <a href="/detail/{{ $tiang->kode }}" target="_blank">
+                                                <a href="/detail/{{ $tiang->id . '-' . $tiang->kode }}" target="_blank">
                                                     {{ $tiang->kode }}
                                                 </a>
                                             </td>
@@ -142,6 +142,10 @@
                                             </td>
                                             @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
                                                 <td>
+                                                    <a href="{{ asset('storage/' . $tiang->qr_code) }}" target="_blank"
+                                                        class="btn btn-sm btn-success">
+                                                        <i class="fas fa-qrcode"></i>
+                                                    </a>
                                                     <a href="{{ route('tiang.edit', ['id' => $tiang->id]) }}"
                                                         class="btn btn-sm btn-primary mx-2">
                                                         <i class="fas fa-edit"></i>

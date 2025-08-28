@@ -32,12 +32,9 @@ use App\Livewire\Admin\Users\EditUser;
 use App\Livewire\Admin\Users\IndexUser;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
-Route::get('detail/{kode}', [WelcomeController::class, 'show'])->name('detail-tiang');
+Route::get('detail/{id}-{slug}', [WelcomeController::class, 'show'])->name('detail-tiang');
 
 Route::middleware(['cekRole:Admin,User,Guest'])->group(function () {
     Route::get('admin/dashboard', IndexDashboard::class)->name('dashboard'); // admin dashboard
