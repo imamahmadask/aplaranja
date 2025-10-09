@@ -304,7 +304,7 @@
                     <strong>Lengan:</strong> ${data.lengan}<br>
                     <strong>Lampu:</strong> ${data.lampu}<br>
                     <strong>Koordinat:</strong> ${lat}, ${long}<br>
-                    <a href="/detail/${data.kode}" target="_blank">Lihat Detail</a>
+                    <a href="/tiang/detail/${data.id}-${data.kode}" target="_blank">Lihat Detail</a>
                 `;
 
                 L.marker([lat, long]).addTo(map)

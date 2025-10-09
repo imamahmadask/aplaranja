@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
-Route::get('detail/{id}-{slug}', [WelcomeController::class, 'show'])->name('detail-tiang');
+Route::get('tiang/detail/{id}-{slug}', [WelcomeController::class, 'show'])->name('detail-tiang');
 
 Route::middleware(['cekRole:Admin,User,Guest'])->group(function () {
     Route::get('admin/dashboard', IndexDashboard::class)->name('dashboard'); // admin dashboard

@@ -25,10 +25,17 @@ class WelcomeController extends Controller
             'data' => $data
         ]);
     }
-    public function show($kode)
+    public function show($id, $kode)
     {
+        $tiang = Tiang::find($id);
 
-        $tiang = Tiang::where('kode', $kode)->firstOrFail();
+        $expectedSlug = \Illuminate\Support\Str::slug($tiang->kode);
+        if ($kode !== $expectedSlug) {
+            return redirect()->route('detail-tiang', [
+                'id' => $tiang->id,
+                'slug' => $expectedSlug,
+            ]);
+        }
 
         return view('details', compact('tiang'));
     }

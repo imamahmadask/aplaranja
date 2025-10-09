@@ -59,6 +59,7 @@ class DetailJalan extends Component
         $tiang = $jalan->tiang()->get();
         foreach ($tiang as $t) {
             $this->kordinat_tiang[] = [
+                'id' => $t->id,
                 'lat' => $t->lat,
                 'long' => $t->long,
                 'jenis' => $t->jenis,
