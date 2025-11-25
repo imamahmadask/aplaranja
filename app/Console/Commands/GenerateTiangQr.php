@@ -34,7 +34,7 @@ class GenerateTiangQr extends Command
 
         foreach ($tiangs as $tiang) {
             $expectedSlug = \Illuminate\Support\Str::slug($tiang->kode);
-            $url = 'https://aplaranja.mataramkota.go.id/detail/'.$tiang->id.'-'.$expectedSlug;
+            $url = 'https://aplaranja.mataramkota.go.id/tiang/detail/'.$tiang->id.'-'.$expectedSlug;
 
             $fileName = "qrcode/tiang-{$tiang->kode}.png";
 
