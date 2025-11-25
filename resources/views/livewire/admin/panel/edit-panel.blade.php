@@ -108,6 +108,21 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="kondisi_jaringan">Kondisi Jaringan</label>
+                                    <select name="kondisi_jaringan" wire:model="kondisi_jaringan" class="form-control">
+                                        <option value="">Pilih Kondisi Jaringan</option>
+                                        <option value="5">5 - Sangat Baik</option>
+                                        <option value="4">4 - Baik</option>
+                                        <option value="3">3 - Cukup Baik</option>
+                                        <option value="2">2 - Buruk</option>
+                                        <option value="1">1 - Sangat Buruk</option>
+                                    </select>
+                                    @error('kondisi_jaringan')
+                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
                             </div>
                             <!-- /.card-body -->
 

@@ -14,7 +14,7 @@ class EditPanel extends Component
     #[Validate('required')]
     public $panelId, $kode, $kwh, $idpel, $saklar, $jaringan, $kordinat, $jalan_id;
 
-    public $jalans, $lat, $long, $kode_jalan;
+    public $jalans, $lat, $long, $kondisi_jaringan, $kode_jalan;
 
     public function render()
     {
@@ -33,6 +33,7 @@ class EditPanel extends Component
         $this->jaringan = $panel->jaringan;
         $this->saklar = $panel->saklar;
         $this->kordinat = $panel->lat.", ".$panel->long;
+        $this->kondisi_jaringan = $panel->kondisi_jaringan;
         $this->jalan_id = $panel->jalan_id;
 
         $this->jalans = Jalan::all();
@@ -54,6 +55,7 @@ class EditPanel extends Component
             'saklar' => $this->saklar,
             'lat' => $this->lat,
             'long' => $this->long,
+            'kondisi_jaringan' => $this->kondisi_jaringan,
             'jalan_id' => $this->jalan_id
         ]);
 

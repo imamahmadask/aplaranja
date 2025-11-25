@@ -14,7 +14,7 @@ class Panel extends Model
     protected $table = 'panels';
 
     protected $fillable = [
-        'kode', 'kwh', 'idpel', 'jaringan', 'saklar', 'lat', 'long', 'jalan_id'
+        'kode', 'kwh', 'idpel', 'jaringan', 'saklar', 'lat', 'long', 'kondisi_jaringan', 'jalan_id'
     ];
 
     public function jalan(): BelongsTo

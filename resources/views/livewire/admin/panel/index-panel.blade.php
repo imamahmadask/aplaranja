@@ -92,6 +92,7 @@
                                         <th>Jaringan</th>
                                         <th>Saklar</th>
                                         <th>Kordinat</th>
+                                        <th>Kondisi Jaringan</th>
                                         <th>Riwayat</th>
                                         @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
                                             <th>Action</th>
@@ -127,6 +128,9 @@
                                             </td>
                                             <td>
                                                 {{ $panel->lat }}, {{ $panel->long }}
+                                            </td>
+                                            <td>
+                                                {{ $panel->kondisi_jaringan }}
                                             </td>
                                             <td>
                                                 {{ $panel->riwayat->count() }}

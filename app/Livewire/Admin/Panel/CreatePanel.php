@@ -14,7 +14,7 @@ class CreatePanel extends Component
     #[Validate('required')]
     public $kode, $kwh, $idpel, $saklar, $jaringan, $kordinat, $jalan_id;
 
-    public $jalans, $lat, $long, $kode_jalan;
+    public $jalans, $lat, $long, $kondisi_jaringan, $kode_jalan;
 
     public function render()
     {
@@ -35,6 +35,7 @@ class CreatePanel extends Component
             'saklar' => $this->saklar,
             'lat' => $this->lat,
             'long' => $this->long,
+            'kondisi_jaringan' => $this->kondisi_jaringan,
             'jalan_id' => $this->jalan_id
         ]);
 
