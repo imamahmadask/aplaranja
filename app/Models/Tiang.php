@@ -27,4 +27,8 @@ class Tiang extends Model
     {
         return $this->hasMany(RiwayatTiang::class);
     }
+    public function lampus(): HasMany
+    {
+        return $this->hasMany(Lampu::class);
+    }
 }

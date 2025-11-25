@@ -75,26 +75,12 @@
                                     <label for="jenis">Jenis Tiang</label>
                                     <select name="jenis" wire:model="jenis" class="form-control">
                                         <option value="">Pilih Jenis</option>
-                                        <option value="Galpanis">Galpanis</option>
+                                        <option value="Galvanis">Galvanis</option>
                                         <option value="Besi">Besi</option>
                                         <option value="Dekoratif">Dekoratif</option>
                                         <option value="-">Tidak ada</option>
                                     </select>
                                     @error('jenis')
-                                        <span class="error text-danger text-sm font-italic">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lengan">Jumlah Lengan</label>
-                                    <select name="lengan" wire:model="lengan" class="form-control">
-                                        <option value="">Pilih Lengan</option>
-                                        <option value="1">1 Lengan</option>
-                                        <option value="2">2 Lengan</option>
-                                        <option value="3">3 Lengan</option>
-                                        <option value="8">8 Lengan</option>
-                                    </select>
-                                    @error('lengan')
                                         <span class="error text-danger text-sm font-italic">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -142,25 +128,109 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="lampu">Jenis Lampu</label>
-                                    <select name="lampu" wire:model="lampu" class="form-control">
-                                        <option value="">Pilih Jenis Lampu</option>
-                                        <option value="LED">LED</option>
-                                        <option value="SON-T">SON-T</option>
+                                    <label for="lengan">Jumlah Lengan</label>
+                                    <select name="lengan" wire:model.live="lengan" class="form-control">
+                                        <option value="">Pilih Lengan</option>
+                                        <option value="1">1 Lengan</option>
+                                        <option value="2">2 Lengan</option>
+                                        <option value="3">3 Lengan</option>
+                                        <option value="8">8 Lengan</option>
+                                        <option value="0">Tidak Ada</option>
                                     </select>
-                                    @error('lampu')
+                                    @error('lengan')
                                         <span class="error text-danger text-sm font-italic">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <!-- Form Lampu Dinamis -->
+                                @if ($lengan > 0)
+                                    <div class="border rounded p-4 bg-light mb-2">
+                                        <h5>Data Lampu per Lengan</h5>
+                                        <div class="row">
+                                            @foreach ($lights as $index => $light)
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="border p-3 rounded bg-white">
+                                                        <h6 class="text-primary">Lengan {{ $index + 1 }}</h6>
+
+                                                        <div class="form-group">
+                                                            <label>Jenis Lampu</label>
+                                                            <select wire:model.live="lights.{{ $index }}.jenis"
+                                                                class="form-control">
+                                                                <option value="">Pilih</option>
+                                                                <option>LED</option>
+                                                                <option>SON-T</option>
+                                                                <option>BOHLAM</option>
+                                                                <option>Sollar Cell</option>
+                                                                <option>Tidak Ada</option>
+                                                            </select>
+                                                            @error("lights.$index.jenis")
+                                                                <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <input type="number"
+                                                                wire:model.live="lights.{{ $index }}.daya"
+                                                                class="form-control" placeholder="Daya (Watt)">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <input type="text"
+                                                                wire:model.live="lights.{{ $index }}.merek"
+                                                                class="form-control" placeholder="Merek">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <input type="number"
+                                                                wire:model.live="lights.{{ $index }}.lumen"
+                                                                class="form-control" placeholder="Lumen">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Kondisi</label>
+                                                            <select
+                                                                wire:model.live="lights.{{ $index }}.kondisi"
+                                                                class="form-control">
+                                                                <option value="5">Sangat Baik</option>
+                                                                <option value="4">Baik</option>
+                                                                <option value="3">Cukup</option>
+                                                                <option value="2">Buruk</option>
+                                                                <option value="1">Sangat Buruk</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if ($lengan != 0)
+                                    <div class="form-group">
+                                        <label for="lampu">Jenis Lampu (Lama)</label>
+                                        <select name="lampu" wire:model="lampu" class="form-control">
+                                            <option value="">Pilih Jenis Lampu</option>
+                                            <option value="LED">LED</option>
+                                            <option value="SON-T">SON-T</option>
+                                            <option value="BOHLAM">BOHLAM</option>
+                                            <option value="Sollar Cell">Solar Cell</option>
+                                            <option value="Tidak Ada">Tidak Ada</option>
+                                        </select>
+                                        @error('lampu')
+                                            <span class="error text-danger text-sm font-italic">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                @endif
 
                                 <div class="form-group">
                                     <label for="kondisi">Kondisi Tiang</label>
                                     <select name="kondisi" wire:model="kondisi" class="form-control">
                                         <option value="">Pilih Kondisi</option>
-                                        <option value="Normal">Normal</option>
-                                        <option value="Rusak Ringan">Rusak Ringan</option>
-                                        <option value="Rusak Sedang">Rusak Sedang</option>
-                                        <option value="Rusak Berat">Rusak Berat</option>
+                                        <option value="5">5 - Sangat Baik</option>
+                                        <option value="4">4 - Baik</option>
+                                        <option value="3">3 - Cukup Baik</option>
+                                        <option value="2">2 - Buruk</option>
+                                        <option value="1">1 - Sangat Buruk</option>
                                     </select>
                                     @error('kondisi')
                                         <span class="error text-danger text-sm font-italic">{{ $message }}</span>

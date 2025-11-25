@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Tiang;
 
+use App\Models\Lampu;
 use App\Models\Panel;
 use App\Models\Tiang;
 use Livewire\Attributes\Title;
@@ -15,12 +16,14 @@ class CreateTiang extends Component
     use WithFileUploads;
 
     #[Validate('required')]
-    public $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $lampu, $posisi_tiang;
+    public $kode, $kategori, $jenis, $lengan, $tahun_pengadaan, $jaringan, $kordinat, $panel_id, $posisi_tiang;
 
     // #[Validate('image|max:2000')]
     public $foto;
 
     public $panels, $lat, $long, $kode_panel, $kondisi;
+
+    public array $lights = [];
 
     public function render()
     {
@@ -43,7 +46,7 @@ class CreateTiang extends Component
             $file_foto = null;
         }
 
-        Tiang::create([
+        $tiang = Tiang::create([
             'kode' => $this->kode_panel.'-'.$this->kode,
             'kategori' => $this->kategori,
             'jenis' => $this->jenis,
@@ -53,11 +56,24 @@ class CreateTiang extends Component
             'lat' => $this->lat,
             'long' => $this->long,
             'panel_id' => $this->panel_id,
-            'lampu' => $this->lampu,
+            'lampu' => '-',
             'posisi_tiang' => $this->posisi_tiang,
             'foto' => $file_foto,
             'kondisi' => $this->kondisi,
         ]);
+
+        if ($this->lengan > 0 && !empty($this->lights)) {
+            foreach ($this->lights as $light) {
+                // dd($light);
+                $tiang->lampus()->create([
+                    'jenis' => $light['jenis'],
+                    'daya' => $light['daya'],
+                    'lumen' => $light['lumen'],
+                    'merek' => $light['merek'],
+                    'kondisi' => $light['kondisi'],
+                ]);
+            }
+        }
 
         $this->reset();
 
@@ -79,5 +95,26 @@ class CreateTiang extends Component
     {
         $panel = Panel::find($value);
         $this->kode_panel = $panel->kode;
+    }
+
+    public function updatedLengan($value)
+    {
+        $value = (int) $value;
+
+        // Reset data lampu
+        $this->lights = [];
+
+        if ($value > 0 && $value <= 8) {
+            // Buat array sebanyak lengan dengan nilai default
+            $this->lights = array_fill(0, $value, [
+                'jenis' => '',
+                'daya' => '',
+                'lumen' => '',
+                'merek' => '',
+                'kondisi' => '5',
+            ]);
+        }
+
+        $this->resetValidation('lights');
     }
 }

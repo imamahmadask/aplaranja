@@ -24,6 +24,8 @@ class EditTiang extends Component
 
     public $foto_asli;
 
+    public array $lights = [];
+
     public function render()
     {
         return view('livewire.admin.tiang.edit-tiang');
@@ -47,6 +49,13 @@ class EditTiang extends Component
         $this->posisi_tiang = $tiang->posisi_tiang;
         $this->kondisi = $tiang->kondisi;
         $this->foto_asli = $tiang->foto;
+
+        $this->lights = $tiang->lampus->map(function ($lampu) {
+            return $lampu->toArray(); // Konversi ke array untuk editing
+        })->toArray();
+
+        // Jika jumlah lampu kurang dari lengan (karena sebelumnya belum sinkron), tambahkan kosong
+        $this->syncLightsWithLengan();
 
         $this->panels = Panel::orderBy('kode', 'asc')->get();
     }
@@ -83,6 +92,23 @@ class EditTiang extends Component
             'foto' => $file_foto,
         ]);
 
+        // === UPDATE DATA LAMPU ===
+        // Hapus semua lampu lama
+        $tiang->lampus()->delete();
+
+        // Buat ulang sesuai data di form
+        if ($this->lengan > 0) {
+            foreach ($this->lights as $light) {
+                $tiang->lampus()->create([
+                    'jenis' => $light['jenis'] ?? 'Tidak Ada',
+                    'daya' => $light['daya'],
+                    'lumen' => $light['lumen'],
+                    'merek' => $light['merek'],
+                    'kondisi' => $light['kondisi'],
+                ]);
+            }
+        }
+
         $this->reset();
 
         $this->redirect('/admin/tiang');
@@ -98,5 +124,39 @@ class EditTiang extends Component
     {
         $panel = Panel::find($value);
         $this->kode_panel = $panel->kode;
+    }
+
+    /**
+     * Otomatis menyesuaikan jumlah item di $lights sesuai $lengan
+     */
+    public function updatedLengan($value)
+    {
+        $value = (int) $value;
+        $this->lengan = $value;
+
+        $this->syncLightsWithLengan();
+        $this->resetValidation('lights'); // Hapus error validasi lama
+    }
+
+    private function syncLightsWithLengan()
+    {
+        $currentCount = count($this->lights);
+        $targetCount = $this->lengan;
+
+        if ($targetCount > $currentCount) {
+            // Tambah lampu kosong
+            for ($i = $currentCount; $i < $targetCount; $i++) {
+                $this->lights[] = [
+                    'jenis' => '',
+                    'daya' => '',
+                    'lumen' => '',
+                    'kondisi' => '5',
+                ];
+            }
+        } elseif ($targetCount < $currentCount) {
+            // Potong lampu yang kelebihan (akan dihapus di DB saat simpan)
+            $this->lights = array_slice($this->lights, 0, $targetCount);
+        }
+        // Jika sama → tidak ada perubahan
     }
 }
