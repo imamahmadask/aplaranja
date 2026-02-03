@@ -169,7 +169,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <input type="number"
+                                                            <input type="text"
                                                                 wire:model.live="lights.{{ $index }}.daya"
                                                                 class="form-control" placeholder="Daya (Watt)">
                                                         </div>
@@ -181,7 +181,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <input type="number"
+                                                            <input type="text"
                                                                 wire:model.live="lights.{{ $index }}.lumen"
                                                                 class="form-control" placeholder="Lumen">
                                                         </div>
