@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('lampus', function(Blueprint $table){
-            $table->string('lumen', 25)->nullable();
+        Schema::table('lampus', function (Blueprint $table) {
+            // $table->string('lumen', 25)->nullable();
             $table->string('kondisi', 25)->nullable();
 
             $table->foreignId('tiang_id')->change();
@@ -31,8 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::table('lampus', function(Blueprint $table){
-            $table->dropColumn('lumen');
+        Schema::table('lampus', function (Blueprint $table) {
+            // $table->dropColumn('lumen');
             $table->dropColumn('kondisi');
         });
     }
