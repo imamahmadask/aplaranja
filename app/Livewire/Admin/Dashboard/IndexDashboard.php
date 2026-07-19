@@ -7,6 +7,7 @@ use App\Models\Lampu;
 use App\Models\Panel;
 use App\Models\Regu;
 use App\Models\Tiang;
+use App\Models\Tagihan;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
@@ -24,11 +25,22 @@ class IndexDashboard extends Component
 
     public function render()
     {
+        $latestTagihan = Tagihan::orderBy('tahun', 'desc')->orderBy('bulan', 'desc')->first();
+        $latestYear = $latestTagihan ? $latestTagihan->tahun : now()->year;
+        $latestMonth = $latestTagihan ? $latestTagihan->bulan : now()->month;
+
+        $tagihan_bulan_ini = Tagihan::where('tahun', $latestYear)->where('bulan', $latestMonth)->sum('total');
+        $tagihan_tahun_ini = Tagihan::where('tahun', $latestYear)->sum('total');
+
         $stat = [
             'count_jalan' => Jalan::count(),
             'count_panel' => Panel::count(),
             'count_tiang' => Tiang::count(),
             'count_regu' => Regu::count(),
+            'tagihan_bulan_ini' => $tagihan_bulan_ini,
+            'tagihan_tahun_ini' => $tagihan_tahun_ini,
+            'periode_tagihan_bulan' => $latestTagihan ? \DateTime::createFromFormat('!m', $latestMonth)->format('F') . ' ' . $latestYear : '-',
+            'periode_tagihan_tahun' => $latestYear,
         ];
 
         $jalans = Jalan::with(['panel.tiang'])

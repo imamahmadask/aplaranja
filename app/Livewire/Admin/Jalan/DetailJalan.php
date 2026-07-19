@@ -34,6 +34,8 @@ class DetailJalan extends Component
     public int $countRusakSedang = 0;
     public int $countRusakBerat = 0;
     public $kordinat_tiang = [];
+    public float $totalTagihan = 0;
+    public $tagihansByMonth = [];
 
     public function render()
     {
@@ -78,6 +80,13 @@ class DetailJalan extends Component
         $this->countLengan();
         $this->countLampuByJenisAndLengan();
         $this->countKondisiTiang();
+        $this->totalTagihan = (float) $jalan->tagihan()->sum('total');
+        $this->tagihansByMonth = $jalan->tagihan()
+            ->selectRaw('tahun, bulan, SUM(pemkwh) as total_kwh, SUM(total) as total_rp')
+            ->groupBy('tahun', 'bulan')
+            ->orderBy('tahun', 'desc')
+            ->orderBy('bulan', 'desc')
+            ->get();
     }
 
     public function countKategoriTiang()

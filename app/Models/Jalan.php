@@ -26,4 +26,9 @@ class Jalan extends Model
 {
     return $this->hasManyThrough(Tiang::class, Panel::class);
 }
+
+    public function tagihan(): HasManyThrough
+    {
+        return $this->hasManyThrough(Tagihan::class, Panel::class);
+    }
 }

@@ -8,16 +8,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CekRole
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (in_array($request->user()->role, $roles)){
-            return $next($request);
+        $user = $request->user();
+        if ($user) {
+            $userRole = strtolower($user->role);
+            $lowercasedRoles = array_map('strtolower', $roles);
+            if (in_array($userRole, $lowercasedRoles)) {
+                return $next($request);
+            }
         }
+        
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
         return redirect('/admin/dashboard');
     }
 }

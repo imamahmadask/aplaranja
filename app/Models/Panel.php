@@ -31,4 +31,9 @@ class Panel extends Model
     {
         return $this->hasMany(RiwayatPanel::class);
     }
+
+    public function tagihan(): HasMany
+    {
+        return $this->hasMany(Tagihan::class);
+    }
 }

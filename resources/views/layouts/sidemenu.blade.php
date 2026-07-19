@@ -160,6 +160,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('tagihan.index') }}"
+                        class="nav-link {{ Request::routeIs('tagihan.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                        <p>
+                            Tagihan Listrik
+                        </p>
+                    </a>
+                </li>
                 @if (Auth::user()->role == 'Admin')
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}"

@@ -95,6 +95,41 @@
             </div>
             <!-- /.row status jalan-->
 
+            <!-- Row Tagihan Stats -->
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-teal">
+                        <div class="inner">
+                            <h3>Rp {{ number_format($stat['tagihan_bulan_ini']) }}</h3>
+                            <p>Tagihan Listrik Bulan Ini ({{ $stat['periode_tagihan_bulan'] }})</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <a href="{{ route('tagihan.index') }}" class="small-box-footer">
+                            Detail Tagihan <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3>Rp {{ number_format($stat['tagihan_tahun_ini']) }}</h3>
+                            <p>Total Tagihan Listrik Tahun Ini ({{ $stat['periode_tagihan_tahun'] }})</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <a href="{{ route('tagihan.index') }}" class="small-box-footer">
+                            Detail Tagihan <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row tagihan stats -->
+
             {{-- Row stats --}}
             <button class="btn btn-sm btn-secondary mb-3" id="toggle-stats">
                 <i class="fas fa-eye"></i> Show Stats

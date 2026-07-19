@@ -30,13 +30,14 @@ use App\Livewire\Admin\Tiang\IndexTiang;
 use App\Livewire\Admin\Users\CreateUser;
 use App\Livewire\Admin\Users\EditUser;
 use App\Livewire\Admin\Users\IndexUser;
+use App\Livewire\Admin\Tagihan\IndexTagihan;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('tiang/detail/{id}-{slug}', [WelcomeController::class, 'show'])->name('detail-tiang');
 
-Route::middleware(['cekRole:Admin,User,Guest'])->group(function () {
+Route::middleware(['auth', 'cekRole:Admin,User,Guest'])->group(function () {
     Route::get('admin/dashboard', IndexDashboard::class)->name('dashboard'); // admin dashboard
 
     Route::get('admin/jalan', IndexJalan::class)->name('jalan.index'); // Jalan
@@ -60,12 +61,14 @@ Route::middleware(['cekRole:Admin,User,Guest'])->group(function () {
 
     Route::get('admin/info', IndexInfo::class)->name('info.index'); // Info
 
+    Route::get('admin/tagihan', IndexTagihan::class)->name('tagihan.index'); // Tagihan
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['cekRole:Admin,User'])->group(function () {
+Route::middleware(['auth', 'cekRole:Admin,User'])->group(function () {
     Route::get('admin/jalan/create', CreateJalan::class)->name('jalan.create'); // Create Jalan
     Route::get('admin/jalan/{id}/edit', EditJalan::class)->name('jalan.edit'); // Edit Jalan
 
@@ -82,7 +85,7 @@ Route::middleware(['cekRole:Admin,User'])->group(function () {
     Route::get('admin/info/{id}/edit', EditInfo::class)->name('info.edit'); // Info
 });
 
-Route::middleware(['cekRole:Admin'])->group(function () {
+Route::middleware(['auth', 'cekRole:Admin'])->group(function () {
     Route::get('admin/users', IndexUser::class)->name('users.index'); // User
     Route::get('admin/users/create', CreateUser::class)->name('users.create'); // User
     Route::get('admin/users/{id}/edit', EditUser::class)->name('users.edit'); // User

@@ -267,9 +267,63 @@
                     </div>
                     <!-- /.card -->
                 </div>
-
             </div>
             <!-- /.row -->
+
+            <!-- Row Tagihan -->
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-file-invoice-dollar mr-1"></i> Pengeluaran Tagihan</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center p-3">
+                                <h5 class="text-muted">Total Tagihan Kumulatif</h5>
+                                <h2 class="text-success font-weight-bold">Rp {{ number_format($totalTagihan) }}</h2>
+                                <p class="text-xs text-muted">Akumulasi seluruh tagihan listrik panel pada ruas jalan ini.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-history mr-1"></i> Rincian Tagihan Bulanan</h3>
+                        </div>
+                        <div class="card-body table-responsive p-0" style="max-height: 250px;">
+                            <table class="table table-sm table-striped text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Periode</th>
+                                        <th class="text-right">Total Pemakaian</th>
+                                        <th class="text-right">Total Tagihan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($tagihansByMonth as $t)
+                                        <tr>
+                                            <td>
+                                                <span class="font-weight-bold">
+                                                    {{ DateTime::createFromFormat('!m', $t->bulan)->format('F') }} {{ $t->tahun }}
+                                                </span>
+                                            </td>
+                                            <td class="text-right">{{ number_format($t->total_kwh) }} KWh</td>
+                                            <td class="text-right text-success font-weight-bold">Rp {{ number_format($t->total_rp) }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center text-muted py-3">Belum ada data tagihan untuk jalan ini.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
