@@ -3,6 +3,7 @@
 use App\Http\Middleware\CekRole;
 use App\Http\Middleware\FrameGuard;
 use App\Http\Middleware\HSTS;
+use App\Http\Middleware\TrustProxies;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // TrustProxies harus diprioritaskan agar HTTPS terdeteksi dari awal request
+        $middleware->prepend(TrustProxies::class);
         $middleware->alias([
             'cekRole' => CekRole::class,
         ]);
