@@ -31,23 +31,36 @@
                     <div class="row p-3">
                         <div class="col-md-6">
                             <h5 class="font-weight-bold mb-3"><i class="fas fa-file-excel mr-1"></i> Import Data Tagihan (CSV/Excel)</h5>
-                            {{-- Form tradisional (bukan Livewire wire:model) --}}
-                            {{-- Solusi untuk cPanel: menghindari endpoint /livewire/upload-file yang gagal 405 --}}
-                            <form action="{{ route('tagihan.import') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
+                            <form wire:submit.prevent="addTagihan">
                                 <div class="form-group">
                                     <label for="fileTagihan" class="font-weight-bold">File Tagihan</label>
-                                    <input type="file" class="form-control @error('fileTagihan') is-invalid @enderror"
-                                        name="fileTagihan" id="fileTagihan"
+                                    <input type="file" class="form-control" wire:model="fileTagihan" id="fileTagihan"
                                         accept=".csv,.xls,.xlsx,.txt" />
                                     <small class="form-text text-muted">Kolom wajib di template: IDPEL, NAMA, ALAMAT, TARIP, DAYA, BLTH, PEMKWH, RPTAG, MATERAI, ADMIN TAGIHAN, TOTAL</small>
-                                    @error('fileTagihan')
-                                        <span class="invalid-feedback d-block" style="font-size: 11.5px;">{{ $message }}</span>
-                                    @enderror
                                 </div>
+
+                                @error('fileTagihan')
+                                    <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                @enderror
+
+                                {{-- Indikator live upload progress --}}
+                                <div wire:loading wire:target="fileTagihan" class="mb-2">
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                                            role="progressbar" style="width: 100%"></div>
+                                    </div>
+                                    <small class="text-muted"><i class="fa fa-spinner fa-spin"></i> Mengunggah file, harap tunggu...</small>
+                                </div>
+
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary w-20 mt-2">
-                                        <i class="fas fa-file-import mr-1"></i> Import Data
+                                    <button type="submit" class="btn btn-primary w-20 mt-2"
+                                        wire:loading.attr="disabled" wire:target="fileTagihan,addTagihan">
+                                        <span wire:loading.remove wire:target="addTagihan">
+                                            <i class="fas fa-file-import mr-1"></i> Import Data
+                                        </span>
+                                        <span wire:loading wire:target="addTagihan">
+                                            <i class="fa fa-spinner fa-spin"></i> Memproses...
+                                        </span>
                                     </button>
                                 </div>
                             </form>
