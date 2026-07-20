@@ -9,10 +9,20 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Detect HTTPS dari header X-Forwarded-Proto (reverse proxy / load balancer)
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=308]
+
+    # Redirect HTTP ke HTTPS langsung (jika tidak ada reverse proxy)
+    # Gunakan 308 (bukan 301/302) agar metode POST tidak berubah menjadi GET
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=308]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    RewriteRule ^ %1 [L,R=308]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
