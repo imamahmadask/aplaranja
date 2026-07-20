@@ -21,7 +21,7 @@ class IndexPanel extends Component
     public $perPage = 25;
     public $search = '';
 
-    #[Validate('required|file|max:2000|mimes:xls,xlsx')]
+    #[Validate('required|file|max:10240|extensions:xls,xlsx,csv')]
     public $filePanel;
 
     public function render()

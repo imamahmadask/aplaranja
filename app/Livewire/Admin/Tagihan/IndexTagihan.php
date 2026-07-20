@@ -25,7 +25,7 @@ class IndexTagihan extends Component
     public $filterBulan = '';
     public $filterTahun = '';
 
-    #[Validate('required|file|max:5000|mimes:csv,xls,xlsx,txt')]
+    #[Validate('required|file|max:10240|extensions:csv,xls,xlsx,txt')]
     public $fileTagihan;
 
     public $deleteBulan = '';
