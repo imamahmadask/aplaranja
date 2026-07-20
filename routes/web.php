@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TagihanImportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Admin\Dashboard\IndexDashboard;
@@ -62,6 +63,7 @@ Route::middleware(['auth', 'cekRole:Admin,User,Guest'])->group(function () {
     Route::get('admin/info', IndexInfo::class)->name('info.index'); // Info
 
     Route::get('admin/tagihan', IndexTagihan::class)->name('tagihan.index'); // Tagihan
+    Route::post('admin/tagihan/import', [TagihanImportController::class, 'import'])->name('tagihan.import'); // Import Tagihan (traditional POST - bypass Livewire upload)
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

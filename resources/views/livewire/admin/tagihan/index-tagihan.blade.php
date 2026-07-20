@@ -31,26 +31,23 @@
                     <div class="row p-3">
                         <div class="col-md-6">
                             <h5 class="font-weight-bold mb-3"><i class="fas fa-file-excel mr-1"></i> Import Data Tagihan (CSV/Excel)</h5>
-                            <form wire:submit.prevent="addTagihan">
+                            {{-- Form tradisional (bukan Livewire wire:model) --}}
+                            {{-- Solusi untuk cPanel: menghindari endpoint /livewire/upload-file yang gagal 405 --}}
+                            <form action="{{ route('tagihan.import') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
                                     <label for="fileTagihan" class="font-weight-bold">File Tagihan</label>
-                                    <input type="file" class="form-control" wire:model="fileTagihan" id="fileTagihan" />
+                                    <input type="file" class="form-control @error('fileTagihan') is-invalid @enderror"
+                                        name="fileTagihan" id="fileTagihan"
+                                        accept=".csv,.xls,.xlsx,.txt" />
                                     <small class="form-text text-muted">Kolom wajib di template: IDPEL, NAMA, ALAMAT, TARIP, DAYA, BLTH, PEMKWH, RPTAG, MATERAI, ADMIN TAGIHAN, TOTAL</small>
+                                    @error('fileTagihan')
+                                        <span class="invalid-feedback d-block" style="font-size: 11.5px;">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
-                                @error('fileTagihan')
-                                    <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
-                                @enderror
-
-                                <div wire:loading wire:target="fileTagihan" wire:key="fileTagihan">
-                                    <i class="fa fa-spinner fa-spin mt-2 ml-2"></i> Mengunggah file...
-                                </div>
-
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary w-20 mt-2">
-                                        <div wire:loading wire:target="addTagihan" wire:key="addTagihan">
-                                            <i class="fa fa-spinner fa-spin"></i>
-                                        </div> Import Data
+                                        <i class="fas fa-file-import mr-1"></i> Import Data
                                     </button>
                                 </div>
                             </form>
