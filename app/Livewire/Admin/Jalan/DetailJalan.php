@@ -83,7 +83,7 @@ class DetailJalan extends Component
         $this->totalTagihan = (float) $jalan->tagihan()->sum('total');
         $this->tagihansByMonth = $jalan->tagihan()
             ->selectRaw('tahun, bulan, SUM(pemkwh) as total_kwh, SUM(total) as total_rp')
-            ->groupBy('tahun', 'bulan')
+            ->groupBy('panels.jalan_id', 'tahun', 'bulan')
             ->orderBy('tahun', 'desc')
             ->orderBy('bulan', 'desc')
             ->get();
